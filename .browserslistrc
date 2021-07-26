@@ -1,2 +1,8 @@
-> 2%
-IE>=10
+# Browser that we support
+
+last 1 version    # the last 1 versions for each browser.
+> 1%              # browsers versions selected by global usage statistics
+not ie > 0
+not ie_mob > 0
+not op_mini all
+not bb 10
