@@ -1,7 +1,7 @@
 # Browser that we support
 
-last 1 version    # the last 1 versions for each browser.
-> 1%              # browsers versions selected by global usage statistics
-not ie > 0
-not ie_mob > 0
-not op_mini all
+last 10 Chrome versions
+last 3 Safari versions
+last 2 Firefox versions
+last 2 Edge versions
+last 2 Opera versions
