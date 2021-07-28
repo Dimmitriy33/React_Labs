@@ -1,0 +1,78 @@
+.navbar-btn {
+  margin-left: 20px;
+  > button {
+    height: 35px;
+    width: 80px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    margin-right: 20px;
+    transition-duration: 0.3s;
+    background-color: #0070d1;
+    border-radius: 10px;
+    border-color: transparent;
+
+    > a {
+      justify-content: center;
+      font-family: "FiraSans-Regular", sans-serif;
+      color: #ffffff;
+    }
+  }
+}
+
+.navbar-btn > :hover {
+  background-color: #6dbbff;
+}
+
+.navbar {
+  display: flex;
+  font-family: "FiraSans-Regular", sans-serif;
+  box-sizing: border-box;
+  justify-content: space-between;
+  width: auto;
+  flex-direction: row;
+  word-wrap: break-word;
+  letter-spacing: 0.6px;
+  padding-top: 4px;
+  margin-right: 50px;
+  float: right;
+  text-decoration: none;
+  color: $basicColor;
+
+  > ul {
+    margin: 10px;
+    padding-top: 5px;
+    display: flex;
+    font-weight: 600;
+    white-space: normal;
+    list-style: none;
+    cursor: default;
+  }
+
+  a {
+    text-decoration: none;
+    color: $basicColor;
+  }
+
+  > li {
+    display: flex;
+    width: auto;
+    margin-left: 15px;
+    margin-right: 10px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  li > a:hover {
+    color: #0070d1;
+  }
+}
+
+.navbar-link {
+  display: flex;
+  width: auto;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 10px;
+}
