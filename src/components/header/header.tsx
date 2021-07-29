@@ -2,12 +2,11 @@
 import "./header.scss";
 import React from "react";
 import Navbar from "./navbar/navbar";
-import logoImg from "../../assets/images/logo.svg";
+import logoImg from "../../assets/images/Logotype.svg";
 
 const Logo = () => (
   <div className="headerContainer-logo">
-    <img src={logoImg} alt="playstation" />
-    <h1>Brawl Stas</h1>
+    <img src={logoImg} alt="logo" />
   </div>
 );
 

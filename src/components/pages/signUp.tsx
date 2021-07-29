@@ -1,9 +1,9 @@
-import React from "react";
-
-const SignUp = () => (
-  <div>
-    <h1>Sign Up</h1>
-  </div>
-);
+function SignUp(): JSX.Element {
+  return (
+    <div>
+      <h1>Sign Up</h1>
+    </div>
+  );
+}
 
 export default SignUp;

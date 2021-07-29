@@ -1,5 +1,5 @@
 .headerContainer {
-  background-color: #f7f7f7;
+  background-color: $basicColor2;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -9,7 +9,7 @@
   word-wrap: break-word;
   padding-top: 10px;
   padding-bottom: 10px;
-  justify-content: space-between;
+  padding-left: 30px;
   margin: 0;
 }
 
@@ -23,14 +23,6 @@
   img {
     margin: 0;
     height: 50px;
-    width: 50px;
-  }
-  h1 {
-    padding-top: 4px;
-    padding-left: 5px;
-    display: flex;
-    color: rgb(54, 54, 54);
-    font-size: 26px;
-    margin: 0;
+    width: 200px;
   }
 }
