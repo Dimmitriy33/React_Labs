@@ -1,44 +1,45 @@
 import { NavLink as Link } from "react-router-dom";
 import "./navbar.scss";
+import * as Routes from "../../constants/routes";
 
 function NavBar(): JSX.Element {
   return (
     <div className="navbar-container">
-      <nav className="navbar">
+      <nav className="navbar-container__menu">
         <ul>
-          <li className="navbar-link">
-            <Link to="/home">Home</Link>
+          <li>
+            <Link to={Routes.Home}>Home</Link>
           </li>
-          <li className="navbar-link">
-            <Link to="/products">Products</Link>
-            <ul className="navbar-dropdown">
-              <li className="navbar-link">
-                <Link to="/products">Among Us</Link>
+          <li>
+            <Link to={Routes.Products}>Products</Link>
+            <ul className="navbar-container__menu__dropdown">
+              <li>
+                <Link to={Routes.Products}>Among Us</Link>
               </li>
-              <li className="navbar-link">
-                <Link to="/products">Brawl stars</Link>
+              <li>
+                <Link to={Routes.Products}>Brawl stars</Link>
               </li>
-              <li className="navbar-link">
-                <Link to="/products">Half-Life</Link>
+              <li>
+                <Link to={Routes.Products}>Half-Life</Link>
               </li>
             </ul>
           </li>
-          <li className="navbar-link">
-            <Link to="/basket">Basket</Link>
+          <li>
+            <Link to={Routes.Basket}>Basket</Link>
           </li>
-          <li className="navbar-link">
-            <Link to="/about">About</Link>
+          <li>
+            <Link to={Routes.About}>About</Link>
           </li>
         </ul>
       </nav>
-      <div className="navbar-btn">
+      <div className="navbar-container__btn">
         <button type="button">
-          <Link className="navbar-btn-link" to="/sign-in">
+          <Link className="navbar-container__btn__link" to={Routes.SignIn}>
             Sign In
           </Link>
         </button>
         <button type="button">
-          <Link className="navbar-btn-link" to="/sign-up">
+          <Link className="navbar-container__btn__link" to={Routes.SignUp}>
             Sign Up
           </Link>
         </button>

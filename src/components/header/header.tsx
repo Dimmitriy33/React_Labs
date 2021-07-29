@@ -5,7 +5,7 @@ import Navbar from "./navbar/navbar";
 import logoImg from "../../assets/images/Logotype.svg";
 
 const Logo = () => (
-  <div className="headerContainer-logo">
+  <div className="header-container__logo">
     <img src={logoImg} alt="logo" />
   </div>
 );
@@ -13,7 +13,7 @@ const Logo = () => (
 class Header extends React.PureComponent {
   render(): JSX.Element {
     return (
-      <header className="headerContainer">
+      <header className="header-container">
         <Logo />
         <Navbar />
       </header>

@@ -1,70 +1,56 @@
 .footer-container {
   display: flex;
   height: auto;
-  width: 100%;
   background-color: $basicColor;
   flex-direction: column;
   font-family: "FiraSans-Regular", sans-serif;
   white-space: normal;
   word-wrap: break-word;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  margin: 0;
 
-  > p {
+  &__title {
+    display: flex;
+    justify-content: center;
+    color: $basicColor2;
+    font-size: 28px;
+    font-weight: 700;
+    white-space: normal;
+    word-spacing: 4px;
+    letter-spacing: 0.8px;
+    height: auto;
+  }
+
+  &__icons {
+    display: flex;
     align-items: center;
-  }
-}
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-family: "FiraSans-Regular", sans-serif;
 
-.footer-title {
-  display: flex;
-  justify-content: center;
-  color: $basicColor2;
-  font-size: 28px;
-  font-weight: 700;
-  white-space: normal;
-  word-spacing: 4px;
-  letter-spacing: 0.8px;
-  height: auto;
-}
+    &__rect {
+      height: 100px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      transition: height 0.5s;
 
-.footer-icons {
-  display: flex;
-  flex-wrap: wrap;
-  height: auto;
-  font-family: "FiraSans-Regular", sans-serif;
-  white-space: normal;
-  word-wrap: break-word;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin: 0;
-}
+      &:hover {
+        height: 120px;
+      }
+    }
 
-.footer-icons-square {
-  height: 100px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  transition: height 0.5s;
+    &__square {
+      height: 100px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      transition: height 0.5s;
 
-  &:hover,
-  &:focus-visible {
-    height: 120px;
-  }
-}
-
-.footer-icons-rect {
-  height: 100px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  transition: height 0.5s;
-
-  &:hover {
-    height: 120px;
+      &:hover,
+      &:focus-visible {
+        height: 120px;
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-.headerContainer {
+.header-container {
   background-color: $basicColor2;
   height: auto;
   display: flex;
@@ -12,18 +12,18 @@
   padding-left: 30px;
   padding-right: 30px;
   margin: 0;
-}
 
-.headerContainer-logo {
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  justify-content: space-between;
-  font-weight: 400;
+  &__logo {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    font-weight: 400;
 
-  img {
-    margin: 0;
-    height: 50px;
-    width: 200px;
+    img {
+      margin: 0;
+      height: 50px;
+      width: 200px;
+    }
   }
 }
