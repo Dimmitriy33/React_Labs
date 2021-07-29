@@ -80,8 +80,10 @@
   }
 
   &__btn {
-    margin-left: 20px;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 25%;
     flex-wrap: nowrap;
     > button {
       display: flex;
@@ -92,11 +94,11 @@
       font-weight: 600;
       letter-spacing: 0.5px;
       white-space: nowrap;
-      margin-right: 40px;
-      transition-duration: 0.3s;
       background-color: #ff4747;
       border-radius: 10px;
       border-color: transparent;
+      transition-duration: 0.3s;
+      cursor: pointer;
 
       &:hover {
         background-color: #ff9191;
