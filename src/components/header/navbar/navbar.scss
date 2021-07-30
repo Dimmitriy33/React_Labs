@@ -1,0 +1,114 @@
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+
+  &__menu {
+    display: flex;
+    font-family: "FiraSans-Regular", sans-serif;
+    box-sizing: border-box;
+    width: auto;
+    flex-direction: row;
+    word-wrap: break-word;
+    letter-spacing: 0.6px;
+    margin-right: 50px;
+    float: right;
+    text-decoration: none;
+    color: $basicColor;
+
+    > ul {
+      margin: 10px;
+      display: flex;
+      font-weight: 600;
+      white-space: normal;
+      list-style: none;
+      cursor: default;
+    }
+
+    a {
+      text-decoration: none;
+      color: $basicColor;
+    }
+
+    li > a:hover {
+      color: #ff4747;
+    }
+
+    & > ul > li,
+    & > ul > li > ul > li {
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      align-items: center;
+      padding-top: 5px;
+      margin-left: 20px;
+      margin-right: 15px;
+      font-size: 19px;
+
+      &:hover > ul {
+        padding-left: 370px;
+        padding-top: 10px;
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        cursor: pointer;
+        color: #ff4747;
+      }
+
+      & > ul > li {
+        padding-top: 10px;
+        align-items: flex-start;
+        font-size: 16px;
+        font-weight: 600;
+        clear: both;
+        width: 100%;
+      }
+    }
+
+    &__dropdown {
+      align-items: center;
+      font-size: 19px;
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      transition: all 0.5s ease;
+      margin-top: 1rem;
+      left: 0;
+      display: none;
+    }
+  }
+
+  &__btn {
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    > button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 100px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      margin-right: 40px;
+      transition-duration: 0.3s;
+      background-color: #ff4747;
+      border-radius: 10px;
+      border-color: transparent;
+
+      &:hover {
+        background-color: #ff9191;
+      }
+    }
+
+    &__link {
+      display: flex;
+      text-decoration: none;
+      font-size: 15px;
+      font-family: "FiraSans-Regular", sans-serif;
+      color: #ffffff;
+    }
+  }
+}

@@ -33,3 +33,5 @@ node_modules
 .stylelintcache
 
 tsconfig.tsbuildinfo
+
+package-lock.json
