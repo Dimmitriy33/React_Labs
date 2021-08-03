@@ -1,0 +1,9 @@
+.productsGrid-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 85%;
+  margin: auto;
+  padding-bottom: 5%;
+}
