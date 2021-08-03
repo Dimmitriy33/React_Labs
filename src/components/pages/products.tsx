@@ -1,11 +1,15 @@
+import getProductsByCategory from "@/api/apiProductsByCategory";
 import IGame from "@/api/productModel";
 import debounce from "@/helpers/debounce";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import LoadingGif from "../../assets/images/icons/loadingGif.gif";
 import ProductsGrid from "../products/productsGrid";
 import "./products.scss";
 
 const Products = (): JSX.Element => {
+  const params = useLocation().search;
+  const category = new URLSearchParams(params).get("category");
   const [searchInput, setSearchInput] = useState<string>("");
   const [products, setProducts] = useState<Array<IGame>>(new Array<IGame>());
   const [loader, toggleLoader] = useState<boolean>(false);
@@ -24,6 +28,16 @@ const Products = (): JSX.Element => {
     }
     toggleLoader(false);
   }, [searchInput]);
+
+  const productsByCategory = async () => {
+    if (category) {
+      setProducts(await getProductsByCategory(category || ""));
+    }
+  };
+
+  useEffect(() => {
+    productsByCategory();
+  }, [category]);
 
   return (
     <div className="productPage-container">

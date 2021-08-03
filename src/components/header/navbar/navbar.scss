@@ -82,8 +82,8 @@
   &__btn {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    width: 20%;
+    justify-content: center;
+    width: 25%;
     flex-wrap: nowrap;
     > button {
       display: flex;
@@ -91,6 +91,7 @@
       justify-content: space-around;
       height: 40px;
       width: 100px;
+      margin-left: 5%;
       font-weight: 600;
       letter-spacing: 0.5px;
       white-space: nowrap;

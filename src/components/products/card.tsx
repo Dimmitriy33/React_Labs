@@ -5,10 +5,10 @@ interface CardProps {
   game: IGame;
 }
 
-const Card = (props: CardProps): JSX.Element => (
+const Card: React.FC<CardProps> = ({ game: { name, logo } }) => (
   <div className="card-container">
-    <img src={props.game.logo} alt="logo" />
-    <p className="card-container__title">{props.game.name}</p>
+    <img src={logo} alt="logo" />
+    <p className="card-container__title">{name}</p>
   </div>
 );
 

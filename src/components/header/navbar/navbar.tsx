@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import { NavLink as Link } from "react-router-dom";
 import "./navbar.scss";
 import * as Routes from "../../constants/routes";
@@ -12,13 +13,19 @@ const Menu = () => (
         <Link to={Routes.Products}>Products</Link>
         <ul className="navbar-container__menu__dropdown">
           <li>
-            <Link to={Routes.Products}>PC</Link>
+            <Link to={`${Routes.ProductsCategory}=pc`}>PC</Link>
           </li>
           <li>
-            <Link to={Routes.Products}>Playstation</Link>
+            <Link to={`${Routes.ProductsCategory}=playstation`}>Playstation</Link>
           </li>
           <li>
-            <Link to={Routes.Products}>Xbox</Link>
+            <Link to={`${Routes.ProductsCategory}=xbox`}>Xbox</Link>
+          </li>
+          <li>
+            <Link to={`${Routes.ProductsCategory}=mobile`}>Mobile</Link>
+          </li>
+          <li>
+            <Link to={`${Routes.ProductsCategory}=nintendo`}>Nintendo</Link>
           </li>
         </ul>
       </li>
