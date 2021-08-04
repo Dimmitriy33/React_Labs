@@ -1,5 +1,5 @@
 import getProductsByCategory from "@/api/apiProductsByCategory";
-import IGame from "@/api/productModel";
+import IGame from "@/models/productModel";
 import debounce from "@/helpers/debounce";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";

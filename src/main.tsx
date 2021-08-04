@@ -15,8 +15,16 @@ import BasketPage from "./components/pages/basket";
 import SignInPage from "./components/pages/signIn";
 import SignUpPage from "./components/pages/signUp";
 import AboutPage from "./components/pages/about";
+import userContext from "./components/users/userContext";
 
 class MainApp extends React.Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      user: {},
+    };
+  }
+
   componentDidCatch(error: Error) {
     alert(error);
     console.error("UI error:", error);
@@ -25,19 +33,21 @@ class MainApp extends React.Component {
 
   render() {
     return (
-      <Router>
-        <Header />
-        <Switch>
-          <Route path={Routes.Home} component={HomePage} />
-          <Route path={Routes.Products} component={ProductsPage} />
-          <Route path={Routes.Basket} component={BasketPage} />
-          <Route path={Routes.SignIn} component={SignInPage} />
-          <Route path={Routes.SignUp} component={SignUpPage} />
-          <Route path={Routes.About} component={AboutPage} />
-          <Redirect exact from="*" to={Routes.Home} />
-        </Switch>
-        <Footer />
-      </Router>
+      <userContext.Provider value={this.state.user}>
+        <Router>
+          <Header />
+          <Switch>
+            <Route path={Routes.Home} component={HomePage} />
+            <Route path={Routes.Products} component={ProductsPage} />
+            <Route path={Routes.Basket} component={BasketPage} />
+            <Route path={Routes.SignIn} component={SignInPage} />
+            <Route path={Routes.SignUp} component={SignUpPage} />
+            <Route path={Routes.About} component={AboutPage} />
+            <Redirect exact from="*" to={Routes.Home} />
+          </Switch>
+          <Footer />
+        </Router>
+      </userContext.Provider>
     );
   }
 }

@@ -11,7 +11,7 @@ interface CategoryProps {
 }
 
 const CategoryCard = (props: CategoryProps): JSX.Element => (
-  <Link className="category-container" to={`${Routes.ProductsCategory}=playstation`}>
+  <Link id={props.name} className="category-container" to={`${Routes.ProductsCategory}=playstation`}>
     <h1>{props.name}</h1>
   </Link>
 );
