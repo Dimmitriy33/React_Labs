@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./categories.scss";
-import * as Routes from "../constants/routes";
+import * as Routes from "../../../constants/routes";
 
 interface CategoriesProps {
   names: Array<string>;

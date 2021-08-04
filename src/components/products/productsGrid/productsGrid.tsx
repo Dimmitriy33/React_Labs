@@ -1,5 +1,5 @@
-import IGame from "@/api/productModel";
-import Card from "./card";
+import IGame from "@/models/productModel";
+import Card from "../card/card";
 import "./productsGrid.scss";
 
 interface ProductsGridProps {

@@ -1,4 +1,4 @@
-import IGame from "@/api/productModel";
+import IGame from "@/models/productModel";
 import "./card.scss";
 
 interface CardProps {

@@ -3,9 +3,10 @@ import IGame from "@/models/productModel";
 import debounce from "@/helpers/debounce";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import LoadingGif from "../../assets/images/icons/loadingGif.gif";
-import ProductsGrid from "../products/productsGrid";
+import LoadingGif from "../../../assets/images/icons/loadingGif.gif";
+import ProductsGrid from "../../products/productsGrid/productsGrid";
 import "./products.scss";
+import ConnectionString from "../../../constants/hostInfo";
 
 const Products = (): JSX.Element => {
   const params = useLocation().search;
@@ -16,13 +17,13 @@ const Products = (): JSX.Element => {
 
   useEffect(() => {
     if (searchInput !== "") {
-      fetch(`http://localhost:8000/api/games/search?term=${searchInput}&limit=100&offset=0`)
+      fetch(`${ConnectionString}/api/games/search?term=${searchInput}&limit=100&offset=0`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
         });
     } else {
-      fetch("http://localhost:8000/api/games/list")
+      fetch(`${ConnectionString}/api/games/list`)
         .then((response) => response.json())
         .then((data) => setProducts(data));
     }

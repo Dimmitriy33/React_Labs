@@ -1,7 +1,8 @@
-import IGame from "./productModel";
+import ConnectionString from "@/constants/hostInfo";
+import IGame from "../models/productModel";
 
 async function getProductsByCategory(category: string): Promise<IGame[]> {
-  const result = await fetch(`http://localhost:8000/api/games/list`);
+  const result = await fetch(`${ConnectionString}/api/games/list`);
   const products: Array<IGame> = await result.json();
 
   const productsByCategory = Array<IGame>();

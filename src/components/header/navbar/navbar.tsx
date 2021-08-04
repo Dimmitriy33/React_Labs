@@ -1,7 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 import { NavLink as Link } from "react-router-dom";
 import "./navbar.scss";
-import * as Routes from "../../constants/routes";
+import * as Routes from "../../../constants/routes";
 
 const Menu = () => (
   <nav className="navbar-container__menu">

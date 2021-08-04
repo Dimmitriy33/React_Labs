@@ -1,9 +1,9 @@
-import IGame from "@/api/productModel";
 import { useEffect, useState } from "react";
-import ProductsGrid from "../products/productsGrid";
-import getTopProducts from "../../api/apiProducts";
+import IGame from "../../../models/productModel";
+import ProductsGrid from "../../products/productsGrid/productsGrid";
+import getTopProducts from "../../../api/apiProducts";
 import "./home.scss";
-import CategoriesCards from "../products/categories";
+import CategoriesCards from "../../products/categoryCard/categories";
 
 const Categories = ["Pc", "Playstation", "Xbox", "Mobile", "Nintendo"];
 
