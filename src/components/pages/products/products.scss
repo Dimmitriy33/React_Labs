@@ -1,0 +1,45 @@
+.productPage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2%;
+  background-color: #fff;
+
+  &__loadingGif {
+    max-width: 200px;
+    height: auto;
+  }
+
+  &__search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-family: "FiraSans-Regular", sans-serif;
+    font-size: 24px;
+
+    > h2 {
+      padding-right: 10px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    &__text {
+      font-family: "FiraSans-Regular", sans-serif;
+      font-size: 18px;
+      height: auto;
+      width: 30%;
+      min-height: 30px;
+      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.3);
+      transition: 0.3s all;
+    }
+
+    &__text:hover {
+      background-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
