@@ -20,6 +20,7 @@
       display: flex;
       justify-content: space-between;
       padding: 0;
+      margin: 0 0 0 0;
       font-weight: 600;
       white-space: normal;
       list-style: none;
@@ -41,7 +42,7 @@
       flex-direction: column;
       width: auto;
       align-items: center;
-      padding-top: 5px;
+      padding-top: 7px;
       margin-left: 20px;
       margin-right: 15px;
       font-size: 19px;
@@ -93,6 +94,10 @@
       width: 100px;
       margin-left: 5%;
       font-weight: 600;
+      font-size: 15px;
+      font-family: "FiraSans-Regular", sans-serif;
+      color: #ffffff;
+      text-decoration: none;
       letter-spacing: 0.5px;
       white-space: nowrap;
       background-color: #ff4747;
@@ -104,14 +109,6 @@
       &:hover {
         background-color: #ff9191;
       }
-    }
-
-    &__link {
-      display: flex;
-      text-decoration: none;
-      font-size: 15px;
-      font-family: "FiraSans-Regular", sans-serif;
-      color: #ffffff;
     }
   }
 }

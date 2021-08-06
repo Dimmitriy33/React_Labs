@@ -19,7 +19,7 @@ const CategoryCard = (props: CategoryProps): JSX.Element => (
 const CategoriesCards = (props: CategoriesProps): JSX.Element => (
   <div className="categories-container">
     {props.names.map((name) => (
-      <CategoryCard name={name} />
+      <CategoryCard key={name} name={name} />
     ))}
   </div>
 );

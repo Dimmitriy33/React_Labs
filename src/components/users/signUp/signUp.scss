@@ -1,0 +1,100 @@
+.signUp-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  max-width: 500px;
+  max-height: 900px;
+  min-width: 300px;
+  margin: 30px;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    h1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 0;
+      margin-bottom: 30px;
+      font-family: "FiraSans-Regular", sans-serif;
+      font-size: 1.8em;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      color: $basicColor;
+    }
+
+    > input {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      justify-items: center;
+      width: 200px;
+      margin-top: 10px;
+      font-family: "FiraSans-Regular", sans-serif;
+      font-size: 1.2em;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    > label {
+      width: 100%;
+      font-family: "FiraSans-Regular", sans-serif;
+      font-size: 1.2em;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      color: $basicColor;
+
+      > input {
+        width: 100%;
+        height: auto;
+        min-height: 30px;
+        padding-left: 10px;
+        font-family: "FiraSans-Regular", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.3);
+        transition: 0.3s all;
+      }
+
+      &__text:hover {
+        background-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-items: center;
+      height: 40px;
+      width: 100px;
+      font-weight: 600;
+      font-size: 15px;
+      font-family: "FiraSans-Regular", sans-serif;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      background-color: $basicColor;
+      border-radius: 10px;
+      border-color: transparent;
+      transition-duration: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ff4747;
+      }
+    }
+  }
+}

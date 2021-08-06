@@ -1,6 +1,8 @@
-/* eslint-disable no-template-curly-in-string */
 import { NavLink as Link } from "react-router-dom";
 import "./navbar.scss";
+import { useState } from "react";
+import SignIn from "../../users/signIn/signIn";
+import SignUp from "../../users/signUp/signUp";
 import * as Routes from "../../../constants/routes";
 
 const Menu = () => (
@@ -39,20 +41,25 @@ const Menu = () => (
   </nav>
 );
 
-const AuthButtons = () => (
-  <div className="navbar-container__btn">
-    <button type="button">
-      <Link className="navbar-container__btn__link" to={Routes.SignIn}>
+const AuthButtons = () => {
+  const [showSignInModal, toggleSignInModal] = useState<boolean>(false);
+  const [showSignUpModal, toggleSignUpModal] = useState<boolean>(false);
+
+  return (
+    <div className="navbar-container__btn">
+      <button type="button" onClick={() => toggleSignInModal(true)}>
         Sign In
-      </Link>
-    </button>
-    <button type="button">
-      <Link className="navbar-container__btn__link" to={Routes.SignUp}>
+      </button>
+      {showSignInModal ? <SignIn closeCallback={() => toggleSignInModal(false)} /> : null}
+
+      <button type="button" onClick={() => toggleSignUpModal(true)}>
         Sign Up
-      </Link>
-    </button>
-  </div>
-);
+      </button>
+      {showSignUpModal ? <SignUp closeCallback={() => toggleSignUpModal(false)} /> : null}
+    </div>
+  );
+};
+
 function NavBar(): JSX.Element {
   return (
     <div className="navbar-container">

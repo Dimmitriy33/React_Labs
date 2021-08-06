@@ -23,6 +23,9 @@ module.exports = (env, argv) => {
   const extendedConfig = {
     target: "web", // force target otherwise HMR doesn't work for style-loader
     devServer: {
+      proxy: {
+        "/api": "http://localhost:8000",
+      },
       hot: true,
       historyApiFallback: {
         // provide index.html instead of 404:not found error (for SPA app)
