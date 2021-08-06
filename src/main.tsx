@@ -37,7 +37,9 @@ class MainApp extends React.Component<any, { user: IUser; token: string }> {
   };
 
   logout = () => {
+    this.setState({ token: "" });
     this.setState({ user: { id: "", userName: "", phoneNumber: "", addressDelivery: "", concurancyStamp: "" } });
+    window.location.assign(Routes.Home);
   };
 
   render() {

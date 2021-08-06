@@ -19,10 +19,7 @@ const Modal = (props: IModalProps): React.ReactPortal => {
   const removeModal = () => {
     document.body.removeChild(root);
     props.closeCallback();
-    window.location.assign("/");
   };
-
-  console.log(props);
 
   return ReactDOM.createPortal(
     <div className="modal-container__window">

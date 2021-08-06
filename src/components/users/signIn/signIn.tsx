@@ -1,65 +1,66 @@
 import "./signIn.scss";
-import Modal from "@/elements/modal";
 import { useState } from "react";
-import * as Routes from "../../../constants/routes";
+import getToken from "@/api/apiAuth";
+import getUser from "@/api/apiGetUser";
 import UserContext, { IUser } from "../userContext";
 
-function SignIn(props: { closeCallback: () => void }): JSX.Element {
-  const user = { id: "", userName: "", phoneNumber: "", addressDelivery: "", concurancyStamp: "" } as IUser;
-  const [email, setEmail] = useState<string>("");
+function SignIn(props: { switchButtons: () => void }): JSX.Element {
   const [password, setPassword] = useState<string>("");
-  const [token, setToken] = useState<string>("");
 
-  debugger;
+  const [email, setEmail] = useState<string>("");
+
   return (
     <UserContext.Consumer>
       {(userCtx) => {
-        const onLogin = () => {
+        const onLogin = async () => {
+          const token = await getToken(email, password);
           userCtx && userCtx.login(token);
-          userCtx && userCtx.setUser(user);
-          window.location.assign(Routes.Home);
-        };
-        return (
-          <Modal closeCallback={props.closeCallback}>
-            <div className="signIn-container">
-              <form className="signIn-container__form">
-                <h1>Sign In</h1>
-                <label htmlFor="email">
-                  Email :
-                  <br />
-                  <input
-                    type="text"
-                    name="email"
-                    onChange={(event) => {
-                      console.log(event.target);
-                      setEmail(event.currentTarget.value);
-                    }}
-                  />
-                </label>
-                <br />
 
-                <label htmlFor="password">
-                  Password :
-                  <br />
-                  <input
-                    type="text"
-                    name="password"
-                    onChange={(event) => {
-                      setPassword(event.currentTarget.value);
-                    }}
-                  />
-                </label>
+          const user = await getUser(token);
+          userCtx && userCtx.setUser(user as IUser);
+
+          props.switchButtons();
+          document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
+        };
+
+        return (
+          <div className="signIn-container">
+            <form onSubmit={onLogin} className="signIn-container__form">
+              <h1>Sign In</h1>
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label>
+                Email :
                 <br />
                 <input
-                  className="signIn-container__form__button"
-                  type="submit"
-                  name="login"
-                  value="Login"
-                  onClick={onLogin}
+                  type="text"
+                  id="u_email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
                 />
-              </form>
-            </div>
-          </Modal>
+              </label>
+              <br />
+
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label>
+                Password :
+                <br />
+                <input
+                  id="u_password"
+                  type="text"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.currentTarget.value);
+                  }}
+                />
+              </label>
+              <br />
+              <button type="button" className="signIn-container__form__button" onClick={onLogin}>
+                Login
+              </button>
+            </form>
+          </div>
         );
       }}
     </UserContext.Consumer>
