@@ -9,13 +9,27 @@ import { useHistory } from "react-router-dom";
 import * as Routes from "../../../constants/routes";
 import UserContext, { IRegisterUser, IUser } from "../userContext";
 
-function SignUp(): JSX.Element {
+interface SignUpProps {
+  closeCallback: () => void;
+}
+function SignUp(props: SignUpProps): JSX.Element {
   const [userEmail, setEmail] = useState<string>("");
   const [userPassword, setPassword] = useState<string>("");
   const [userUsername, setUsername] = useState<string>("");
   const [userAddress, setAddress] = useState<string>("");
   const [userPhoneNumber, setPhoneNumber] = useState<string>("");
   const history = useHistory();
+
+  const closeModal = () => {
+    Swal.fire({
+      title: "Error",
+      text: "Invali1d login attempt!",
+      icon: "error",
+    });
+    props.closeCallback();
+
+    history.push(Routes.Home);
+  };
 
   return (
     <UserContext.Consumer>
@@ -35,13 +49,7 @@ function SignUp(): JSX.Element {
             const token = await getToken(userForRegister.email, userForRegister.password);
 
             if (token === null) {
-              Swal.fire({
-                title: "Error",
-                text: "Invalid login attempt!",
-                icon: "error",
-              });
-
-              history.push(Routes.Home);
+              closeModal();
             } else {
               userCtx && userCtx.login(token);
 
@@ -51,12 +59,7 @@ function SignUp(): JSX.Element {
               history.push(Routes.Profile);
             }
           } else {
-            Swal.fire({
-              title: "Error",
-              text: "Invalid register attempt!",
-              icon: "error",
-            });
-            history.push(Routes.Home);
+            closeModal();
           }
 
           document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);

@@ -8,10 +8,26 @@ import { useHistory } from "react-router-dom";
 import * as Routes from "../../../constants/routes";
 import UserContext, { IUser } from "../userContext";
 
-function SignIn(): JSX.Element {
+interface SignInProps {
+  closeCallback: () => void;
+}
+
+function SignIn(props: SignInProps): JSX.Element {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const history = useHistory();
+
+  const closeModal = () => {
+    Swal.fire({
+      title: "Error",
+      text: "Invalid login attempt!",
+      icon: "error",
+    });
+
+    props.closeCallback();
+
+    history.push(Routes.Home);
+  };
 
   return (
     <UserContext.Consumer>
@@ -20,17 +36,15 @@ function SignIn(): JSX.Element {
           const token = await getToken(email, password);
 
           if (token === null) {
-            Swal.fire({
-              title: "Error",
-              text: "Invalid login attempt!",
-              icon: "error",
-            });
-
-            history.push(Routes.Home);
+            closeModal();
           } else {
             userCtx && userCtx.login(token);
-
             const user = await getUser(token);
+
+            if (user === null) {
+              closeModal();
+            }
+
             userCtx && userCtx.setUser(user as IUser);
           }
 

@@ -25,7 +25,7 @@ const Modal = (props: IModalProps): React.ReactPortal => {
     document.body.removeChild(root);
     props.closeCallback();
 
-    if (!context?.isAiuthenticated) {
+    if (!context?.isAuthenticated) {
       history.push(Routes.Home);
     }
   };

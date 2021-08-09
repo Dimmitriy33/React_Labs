@@ -51,7 +51,7 @@ function AuthButtons(): JSX.Element {
     <UserContext.Consumer>
       {(userCtx) => (
         <div className="navbar-container__btn">
-          {!userCtx?.isAiuthenticated ? (
+          {!userCtx?.isAuthenticated ? (
             <button type="button" onClick={() => toggleSignInModal(true)}>
               Sign In
             </button>
@@ -61,17 +61,17 @@ function AuthButtons(): JSX.Element {
 
           {showSignInModal ? (
             <Modal closeCallback={() => toggleSignInModal(false)}>
-              <SignIn />
+              <SignIn closeCallback={() => toggleSignInModal(false)} />
             </Modal>
           ) : null}
 
           {showSignUpModal ? (
             <Modal closeCallback={() => toggleSignUpModal(false)}>
-              <SignUp />
+              <SignUp closeCallback={() => toggleSignUpModal(false)} />
             </Modal>
           ) : null}
 
-          {!userCtx?.isAiuthenticated ? (
+          {!userCtx?.isAuthenticated ? (
             <button type="button" onClick={() => toggleSignUpModal(true)}>
               Sign Up
             </button>
