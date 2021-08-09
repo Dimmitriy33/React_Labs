@@ -2,11 +2,11 @@ import "./signIn.scss";
 import { useState } from "react";
 import getToken from "@/api/apiAuth";
 import getUser from "@/api/apiGetUser";
+import validator from "validator";
 import UserContext, { IUser } from "../userContext";
 
 function SignIn(props: { switchButtons: () => void }): JSX.Element {
   const [password, setPassword] = useState<string>("");
-
   const [email, setEmail] = useState<string>("");
 
   return (
@@ -39,6 +39,7 @@ function SignIn(props: { switchButtons: () => void }): JSX.Element {
                     setEmail(event.target.value);
                   }}
                 />
+                {validator.isEmail(email) ? null : <span className="input-error">Invalid email</span>}
               </label>
               <br />
 
@@ -54,6 +55,9 @@ function SignIn(props: { switchButtons: () => void }): JSX.Element {
                     setPassword(event.currentTarget.value);
                   }}
                 />
+                {password.length > 5 && password.length < 30 && validator.isAlphanumeric(password) ? null : (
+                  <span className="input-error">Invalid password</span>
+                )}
               </label>
               <br />
               <button type="button" className="signIn-container__form__button" onClick={onLogin}>

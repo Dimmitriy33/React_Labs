@@ -3,13 +3,11 @@ import { useState } from "react";
 import getUser from "@/api/apiGetUser";
 import getToken from "@/api/apiAuth";
 import registerUser from "@/api/apiRegister";
+import validator from "validator";
 import * as Routes from "../../../constants/routes";
 import UserContext, { IRegisterUser, IUser } from "../userContext";
 
 function SignUp(props: { switchButtons: () => void }): JSX.Element {
-  const [user, setUser] = useState<IUser | null>(null);
-  const [token, setToken] = useState<string>("");
-
   const [userEmail, setEmail] = useState<string>("");
   const [userPassword, setPassword] = useState<string>("");
   const [userUsername, setUsername] = useState<string>("");
@@ -28,17 +26,23 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
             phoneNumber: userPhoneNumber,
           } as IRegisterUser;
 
-          registerUser(userForRegister);
+          const result = await registerUser(userForRegister);
 
-          setToken(await getToken(userForRegister.email, userForRegister.password));
-          userCtx && userCtx.login(token);
+          if (result) {
+            const token = await getToken(userForRegister.email, userForRegister.password);
+            userCtx && userCtx.login(token);
 
-          setUser(await getUser(token));
-          userCtx && userCtx.setUser(user as IUser);
+            const user = await getUser(token);
+            userCtx && userCtx.setUser(user as IUser);
 
-          props.switchButtons();
-          window.location.assign(Routes.Profile);
+            document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
+            props.switchButtons();
+            window.location.href = Routes.Profile;
+          } else {
+            window.alert("Fail sign up attempt");
+          }
         };
+
         return (
           <div className="signUp-container">
             <form className="signUp-container__form">
@@ -54,9 +58,9 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
                     setEmail(event.currentTarget.value);
                   }}
                 />
+                {validator.isEmail(userEmail) ? null : <span className="input-error">Invalid email</span>}
               </label>
               <br />
-
               <label htmlFor="password">
                 Password :
                 <br />
@@ -68,6 +72,11 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
                     setPassword(event.currentTarget.value);
                   }}
                 />
+                {userPassword.length > 5 &&
+                userPassword.length < 30 &&
+                validator.isAlphanumeric(userPassword) ? null : (
+                  <span className="input-error">Invalid password</span>
+                )}
               </label>
               <br />
 
@@ -81,6 +90,11 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
                     setUsername(event.currentTarget.value);
                   }}
                 />
+                {userUsername.length > 5 &&
+                userUsername.length < 30 &&
+                validator.isAlphanumeric(userUsername) ? null : (
+                  <span className="input-error">Invalid username</span>
+                )}
               </label>
               <br />
 
@@ -94,6 +108,9 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
                     setPhoneNumber(event.currentTarget.value);
                   }}
                 />
+                {validator.isMobilePhone(userPhoneNumber) ? null : (
+                  <span className="input-error">Invalid phone number</span>
+                )}
               </label>
               <br />
 
@@ -107,6 +124,9 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
                     setAddress(event.currentTarget.value);
                   }}
                 />
+                {userAddress.length > 6 && userAddress.length < 100 && validator.isAlphanumeric(userAddress) ? null : (
+                  <span className="input-error">Invalid address</span>
+                )}
               </label>
               <br />
               <input

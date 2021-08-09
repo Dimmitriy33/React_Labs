@@ -1,26 +1,31 @@
 import { IRegisterUser } from "@/components/users/userContext";
 
-async function registerUser(user: IRegisterUser): Promise<void> {
+async function registerUser(user: IRegisterUser): Promise<boolean> {
+  let responseResult = false;
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-
-  const raw = JSON.stringify({
-    email: user.email,
-    userName: user.userName,
-    phoneNumber: user.phoneNumber,
-    addressDelivery: user.addressDelivery,
-    password: user.password,
-  });
-
   const requestOptions = {
     method: "POST",
-    headers: myHeaders,
-    body: raw,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: user.email,
+      userName: user.userName,
+      phoneNumber: user.phoneNumber,
+      addressDelivery: user.addressDelivery,
+      password: user.password,
+    }),
   };
 
-  await fetch("http://localhost:8000/api/auth/sign-up", requestOptions)
-    .then((result) => console.log(result.status))
-    .catch((error) => console.log("error", error));
+  const response = await fetch("http://localhost:8000/api/auth/sign-up", requestOptions);
+  console.log(response);
+  console.log(response.status);
+  if (response.ok) {
+    responseResult = true;
+  }
+
+  return responseResult;
 }
 
 export default registerUser;

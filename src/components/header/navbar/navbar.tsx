@@ -50,28 +50,34 @@ function AuthButtons(): JSX.Element {
   const [isUserLoggedIn, toggleAuthButtons] = useState<boolean>(false);
 
   return (
-    <div className="navbar-container__btn">
-      {!isUserLoggedIn ? (
-        <button type="button" onClick={() => toggleSignInModal(true)}>
-          Sign In
-        </button>
-      ) : (
-        <UserContext.Consumer>{(userCtx) => <h2>{userCtx?.user.userName}</h2>}</UserContext.Consumer>
-      )}
+    <UserContext.Consumer>
+      {(userCtx) => (
+        <div className="navbar-container__btn">
+          {!isUserLoggedIn ? (
+            <button type="button" onClick={() => toggleSignInModal(true)}>
+              Sign In
+            </button>
+          ) : (
+            <h2>{userCtx?.user.userName}</h2>
+          )}
 
-      {showSignInModal ? (
-        <Modal closeCallback={() => toggleSignInModal(false)}>
-          <SignIn switchButtons={() => toggleAuthButtons(true)} />
-        </Modal>
-      ) : null}
+          {showSignInModal ? (
+            <Modal closeCallback={() => toggleSignInModal(false)}>
+              <SignIn switchButtons={() => toggleAuthButtons(true)} />
+            </Modal>
+          ) : null}
 
-      {!isUserLoggedIn ? (
-        <button type="button" onClick={() => toggleSignUpModal(true)}>
-          Sign Up
-        </button>
-      ) : (
-        <UserContext.Consumer>
-          {(userCtx) => (
+          {showSignUpModal ? (
+            <Modal closeCallback={() => toggleSignUpModal(false)}>
+              <SignUp switchButtons={() => toggleAuthButtons(true)} />
+            </Modal>
+          ) : null}
+
+          {!isUserLoggedIn ? (
+            <button type="button" onClick={() => toggleSignUpModal(true)}>
+              Sign Up
+            </button>
+          ) : (
             <button
               type="button"
               onClick={() => {
@@ -82,15 +88,9 @@ function AuthButtons(): JSX.Element {
               Sign Out
             </button>
           )}
-        </UserContext.Consumer>
+        </div>
       )}
-
-      {showSignUpModal ? (
-        <Modal closeCallback={() => toggleSignUpModal(false)}>
-          <SignUp switchButtons={() => toggleAuthButtons(true)} />
-        </Modal>
-      ) : null}
-    </div>
+    </UserContext.Consumer>
   );
 }
 

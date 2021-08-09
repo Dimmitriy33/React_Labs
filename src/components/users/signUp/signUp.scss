@@ -98,3 +98,20 @@
     }
   }
 }
+
+.input-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 5px;
+  padding: 0;
+  width: 100%;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "FiraSans-Regular", sans-serif;
+  color: #ff4747;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition-duration: 0.3s;
+}
