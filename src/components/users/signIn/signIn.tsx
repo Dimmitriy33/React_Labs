@@ -3,9 +3,10 @@ import { useState } from "react";
 import getToken from "@/api/apiAuth";
 import getUser from "@/api/apiGetUser";
 import validator from "validator";
+import * as Routes from "../../../constants/routes";
 import UserContext, { IUser } from "../userContext";
 
-function SignIn(props: { switchButtons: () => void }): JSX.Element {
+function SignIn(): JSX.Element {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
@@ -14,12 +15,17 @@ function SignIn(props: { switchButtons: () => void }): JSX.Element {
       {(userCtx) => {
         const onLogin = async () => {
           const token = await getToken(email, password);
-          userCtx && userCtx.login(token);
 
-          const user = await getUser(token);
-          userCtx && userCtx.setUser(user as IUser);
+          if (token === null) {
+            window.alert("Invalid login attempt");
+            window.location.href = Routes.Home;
+          } else {
+            userCtx && userCtx.login(token);
 
-          props.switchButtons();
+            const user = await getUser(token);
+            userCtx && userCtx.setUser(user as IUser);
+          }
+
           document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
         };
 

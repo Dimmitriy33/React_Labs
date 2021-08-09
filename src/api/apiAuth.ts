@@ -1,8 +1,8 @@
-async function getToken(uEmail: string, uPassword: string): Promise<string> {
+async function getToken(uEmail: string, uPassword: string): Promise<string | null> {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
-  const token = await fetch("http://localhost:8000/api/auth/sign-in", {
+  const response = await fetch("http://localhost:8000/api/auth/sign-in", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,7 +12,12 @@ async function getToken(uEmail: string, uPassword: string): Promise<string> {
       password: uPassword,
     }),
   });
-  return token.text();
+
+  if (response.ok) {
+    return response.text();
+  }
+
+  return null;
 }
 
 export default getToken;

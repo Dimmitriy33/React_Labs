@@ -7,7 +7,7 @@ import validator from "validator";
 import * as Routes from "../../../constants/routes";
 import UserContext, { IRegisterUser, IUser } from "../userContext";
 
-function SignUp(props: { switchButtons: () => void }): JSX.Element {
+function SignUp(): JSX.Element {
   const [userEmail, setEmail] = useState<string>("");
   const [userPassword, setPassword] = useState<string>("");
   const [userUsername, setUsername] = useState<string>("");
@@ -26,20 +26,25 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
             phoneNumber: userPhoneNumber,
           } as IRegisterUser;
 
+          debugger;
           const result = await registerUser(userForRegister);
-
           if (result) {
             const token = await getToken(userForRegister.email, userForRegister.password);
-            userCtx && userCtx.login(token);
 
-            const user = await getUser(token);
-            userCtx && userCtx.setUser(user as IUser);
+            if (token === null) {
+              window.alert("Invalid login attempt");
+              window.location.href = Routes.Home;
+            } else {
+              userCtx && userCtx.login(token);
 
-            document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
-            props.switchButtons();
-            window.location.href = Routes.Profile;
+              const user = await getUser(token);
+              userCtx && userCtx.setUser(user as IUser);
+
+              window.location.href = Routes.Profile;
+            }
           } else {
-            window.alert("Fail sign up attempt");
+            window.alert("Invalid register attempt");
+            window.location.href = Routes.Home;
           }
         };
 
@@ -124,7 +129,7 @@ function SignUp(props: { switchButtons: () => void }): JSX.Element {
                     setAddress(event.currentTarget.value);
                   }}
                 />
-                {userAddress.length > 6 && userAddress.length < 100 && validator.isAlphanumeric(userAddress) ? null : (
+                {userAddress.length > 6 && userAddress.length < 100 && validator.isAscii ? null : (
                   <span className="input-error">Invalid address</span>
                 )}
               </label>

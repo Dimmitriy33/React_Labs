@@ -6,8 +6,9 @@ import React from "react";
 import { Header, Footer, HomePage, ProductsPage, BasketPage, AboutPage, ProfilePage } from "./components";
 import * as Routes from "./constants/routes";
 import UserContext, { IContext, IUser } from "./components/users/userContext";
+import PrivateRoute from "./helpers/privateRoute";
 
-class MainApp extends React.Component<any, { user: IUser; token: string }> {
+class MainApp extends React.Component<any, { user: IUser; token: string; isAiuthenticated: boolean }> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -19,6 +20,7 @@ class MainApp extends React.Component<any, { user: IUser; token: string }> {
         concurancyStamp: "",
       },
       token: "",
+      isAiuthenticated: false,
     };
   }
 
@@ -34,9 +36,11 @@ class MainApp extends React.Component<any, { user: IUser; token: string }> {
 
   login = (newToken: string) => {
     this.setState({ token: newToken });
+    this.setState({ isAiuthenticated: true });
   };
 
   logout = () => {
+    this.setState({ isAiuthenticated: false });
     this.setState({ token: "" });
     this.setState({ user: { id: "", userName: "", phoneNumber: "", addressDelivery: "", concurancyStamp: "" } });
     window.location.assign(Routes.Home);
@@ -49,6 +53,7 @@ class MainApp extends React.Component<any, { user: IUser; token: string }> {
       login: this.login,
       setUser: this.setUser,
       token: this.state.token,
+      isAiuthenticated: this.state.isAiuthenticated,
     };
 
     return (
@@ -57,10 +62,18 @@ class MainApp extends React.Component<any, { user: IUser; token: string }> {
           <Header />
           <Switch>
             <Route path={Routes.Home} component={HomePage} />
-            <Route path={Routes.Products} component={ProductsPage} />
-            <Route path={Routes.Basket} component={BasketPage} />
-            <Route path={Routes.About} component={AboutPage} />
-            <Route path={Routes.Profile} component={ProfilePage} />
+            <PrivateRoute path={Routes.Products}>
+              <ProductsPage />
+            </PrivateRoute>
+            <PrivateRoute path={Routes.Basket}>
+              <BasketPage />
+            </PrivateRoute>
+            <PrivateRoute path={Routes.About}>
+              <AboutPage />
+            </PrivateRoute>
+            <PrivateRoute path={Routes.Profile}>
+              <ProfilePage />
+            </PrivateRoute>
             <Redirect exact from="*" to={Routes.Home} />
           </Switch>
           <Footer />
