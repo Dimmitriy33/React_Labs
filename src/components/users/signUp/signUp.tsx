@@ -4,6 +4,8 @@ import getUser from "@/api/apiGetUser";
 import getToken from "@/api/apiAuth";
 import registerUser from "@/api/apiRegister";
 import validator from "validator";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 import * as Routes from "../../../constants/routes";
 import UserContext, { IRegisterUser, IUser } from "../userContext";
 
@@ -13,6 +15,7 @@ function SignUp(): JSX.Element {
   const [userUsername, setUsername] = useState<string>("");
   const [userAddress, setAddress] = useState<string>("");
   const [userPhoneNumber, setPhoneNumber] = useState<string>("");
+  const history = useHistory();
 
   return (
     <UserContext.Consumer>
@@ -26,26 +29,37 @@ function SignUp(): JSX.Element {
             phoneNumber: userPhoneNumber,
           } as IRegisterUser;
 
-          debugger;
           const result = await registerUser(userForRegister);
+
           if (result) {
             const token = await getToken(userForRegister.email, userForRegister.password);
 
             if (token === null) {
-              window.alert("Invalid login attempt");
-              window.location.href = Routes.Home;
+              Swal.fire({
+                title: "Error",
+                text: "Invalid login attempt!",
+                icon: "error",
+              });
+
+              history.push(Routes.Home);
             } else {
               userCtx && userCtx.login(token);
 
               const user = await getUser(token);
               userCtx && userCtx.setUser(user as IUser);
 
-              window.location.href = Routes.Profile;
+              history.push(Routes.Profile);
             }
           } else {
-            window.alert("Invalid register attempt");
-            window.location.href = Routes.Home;
+            Swal.fire({
+              title: "Error",
+              text: "Invalid register attempt!",
+              icon: "error",
+            });
+            history.push(Routes.Home);
           }
+
+          document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
         };
 
         return (
@@ -134,13 +148,9 @@ function SignUp(): JSX.Element {
                 )}
               </label>
               <br />
-              <input
-                className="signUp-container__form__button"
-                type="submit"
-                name="login"
-                value="Register"
-                onClick={onRegister}
-              />
+              <button type="button" className="signUp-container__form__button" onClick={onRegister}>
+                Login
+              </button>
             </form>
           </div>
         );

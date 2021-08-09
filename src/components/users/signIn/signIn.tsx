@@ -3,12 +3,15 @@ import { useState } from "react";
 import getToken from "@/api/apiAuth";
 import getUser from "@/api/apiGetUser";
 import validator from "validator";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 import * as Routes from "../../../constants/routes";
 import UserContext, { IUser } from "../userContext";
 
 function SignIn(): JSX.Element {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const history = useHistory();
 
   return (
     <UserContext.Consumer>
@@ -17,8 +20,13 @@ function SignIn(): JSX.Element {
           const token = await getToken(email, password);
 
           if (token === null) {
-            window.alert("Invalid login attempt");
-            window.location.href = Routes.Home;
+            Swal.fire({
+              title: "Error",
+              text: "Invalid login attempt!",
+              icon: "error",
+            });
+
+            history.push(Routes.Home);
           } else {
             userCtx && userCtx.login(token);
 

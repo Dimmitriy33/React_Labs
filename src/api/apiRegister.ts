@@ -19,8 +19,6 @@ async function registerUser(user: IRegisterUser): Promise<boolean> {
   };
 
   const response = await fetch("http://localhost:8000/api/auth/sign-up", requestOptions);
-  console.log(response);
-  console.log(response.status);
   if (response.ok) {
     responseResult = true;
   }

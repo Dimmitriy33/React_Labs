@@ -1,6 +1,9 @@
-import { ReactNode, useEffect } from "react";
+import UserContext from "@/components/users/userContext";
+import { ReactNode, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useHistory } from "react-router-dom";
 import rmImage from "../assets/images/icons/icon-remove-1.jpg";
+import * as Routes from "../constants/routes";
 import "./modal.scss";
 
 interface IModalProps {
@@ -11,6 +14,8 @@ interface IModalProps {
 const Modal = (props: IModalProps): React.ReactPortal => {
   const root = document.createElement("div");
   root.classList.add("modal-container");
+  const context = useContext(UserContext);
+  const history = useHistory();
 
   useEffect(() => {
     document.body.appendChild(root);
@@ -19,6 +24,10 @@ const Modal = (props: IModalProps): React.ReactPortal => {
   const removeModal = () => {
     document.body.removeChild(root);
     props.closeCallback();
+
+    if (!context?.isAiuthenticated) {
+      history.push(Routes.Home);
+    }
   };
 
   return ReactDOM.createPortal(
