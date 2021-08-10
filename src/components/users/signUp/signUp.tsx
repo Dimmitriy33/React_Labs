@@ -6,8 +6,10 @@ import registerUser from "@/api/apiRegister";
 import validator from "validator";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginAsync, setUserAsync } from "@/redux/actions/userActions";
 import * as Routes from "../../../constants/routes";
-import UserContext, { IRegisterUser, IUser } from "../userContext";
+import { IRegisterUser, IUser } from "../userContext";
 
 interface SignUpProps {
   closeCallback: () => void;
@@ -19,6 +21,7 @@ function SignUp(props: SignUpProps): JSX.Element {
   const [userAddress, setAddress] = useState<string>("");
   const [userPhoneNumber, setPhoneNumber] = useState<string>("");
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const closeModal = () => {
     Swal.fire({
@@ -31,134 +34,121 @@ function SignUp(props: SignUpProps): JSX.Element {
     history.push(Routes.Home);
   };
 
+  const onRegister = async () => {
+    const userForRegister = {
+      email: userEmail,
+      password: userPassword,
+      userName: userUsername,
+      addressDelivery: userAddress,
+      phoneNumber: userPhoneNumber,
+    } as IRegisterUser;
+
+    const result = await registerUser(userForRegister);
+
+    if (result) {
+      const token = await getToken(userForRegister.email, userForRegister.password);
+
+      if (token === null) {
+        closeModal();
+      } else {
+        dispatch(loginAsync(token));
+
+        const user = await getUser(token);
+        dispatch(setUserAsync(user as IUser));
+
+        history.push(Routes.Profile);
+      }
+    } else {
+      closeModal();
+    }
+
+    document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
+  };
   return (
-    <UserContext.Consumer>
-      {(userCtx) => {
-        const onRegister = async () => {
-          const userForRegister = {
-            email: userEmail,
-            password: userPassword,
-            userName: userUsername,
-            addressDelivery: userAddress,
-            phoneNumber: userPhoneNumber,
-          } as IRegisterUser;
+    <div className="signUp-container">
+      <form className="signUp-container__form">
+        <h1>Sign Up</h1>
+        <label htmlFor="email">
+          Email :
+          <br />
+          <input
+            type="text"
+            name="email"
+            value={userEmail}
+            onChange={(event) => {
+              setEmail(event.currentTarget.value);
+            }}
+          />
+          {validator.isEmail(userEmail) ? null : <span className="input-error">Invalid email</span>}
+        </label>
+        <br />
+        <label htmlFor="password">
+          Password :
+          <br />
+          <input
+            type="text"
+            name="password"
+            value={userPassword}
+            onChange={(event) => {
+              setPassword(event.currentTarget.value);
+            }}
+          />
+          {userPassword.length > 5 && userPassword.length < 30 && validator.isAlphanumeric(userPassword) ? null : (
+            <span className="input-error">Invalid password</span>
+          )}
+        </label>
+        <br />
 
-          const result = await registerUser(userForRegister);
+        <label htmlFor="username">
+          Username :
+          <br />
+          <input
+            type="text"
+            name="username"
+            onChange={(event) => {
+              setUsername(event.currentTarget.value);
+            }}
+          />
+          {userUsername.length > 5 && userUsername.length < 30 && validator.isAlphanumeric(userUsername) ? null : (
+            <span className="input-error">Invalid username</span>
+          )}
+        </label>
+        <br />
 
-          if (result) {
-            const token = await getToken(userForRegister.email, userForRegister.password);
+        <label htmlFor="pNumber">
+          Phone number :
+          <br />
+          <input
+            type="text"
+            name="pNumber"
+            onChange={(event) => {
+              setPhoneNumber(event.currentTarget.value);
+            }}
+          />
+          {validator.isMobilePhone(userPhoneNumber) ? null : <span className="input-error">Invalid phone number</span>}
+        </label>
+        <br />
 
-            if (token === null) {
-              closeModal();
-            } else {
-              userCtx && userCtx.login(token);
-
-              const user = await getUser(token);
-              userCtx && userCtx.setUser(user as IUser);
-
-              history.push(Routes.Profile);
-            }
-          } else {
-            closeModal();
-          }
-
-          document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
-        };
-
-        return (
-          <div className="signUp-container">
-            <form className="signUp-container__form">
-              <h1>Sign Up</h1>
-              <label htmlFor="email">
-                Email :
-                <br />
-                <input
-                  type="text"
-                  name="email"
-                  value={userEmail}
-                  onChange={(event) => {
-                    setEmail(event.currentTarget.value);
-                  }}
-                />
-                {validator.isEmail(userEmail) ? null : <span className="input-error">Invalid email</span>}
-              </label>
-              <br />
-              <label htmlFor="password">
-                Password :
-                <br />
-                <input
-                  type="text"
-                  name="password"
-                  value={userPassword}
-                  onChange={(event) => {
-                    setPassword(event.currentTarget.value);
-                  }}
-                />
-                {userPassword.length > 5 &&
-                userPassword.length < 30 &&
-                validator.isAlphanumeric(userPassword) ? null : (
-                  <span className="input-error">Invalid password</span>
-                )}
-              </label>
-              <br />
-
-              <label htmlFor="username">
-                Username :
-                <br />
-                <input
-                  type="text"
-                  name="username"
-                  onChange={(event) => {
-                    setUsername(event.currentTarget.value);
-                  }}
-                />
-                {userUsername.length > 5 &&
-                userUsername.length < 30 &&
-                validator.isAlphanumeric(userUsername) ? null : (
-                  <span className="input-error">Invalid username</span>
-                )}
-              </label>
-              <br />
-
-              <label htmlFor="pNumber">
-                Phone number :
-                <br />
-                <input
-                  type="text"
-                  name="pNumber"
-                  onChange={(event) => {
-                    setPhoneNumber(event.currentTarget.value);
-                  }}
-                />
-                {validator.isMobilePhone(userPhoneNumber) ? null : (
-                  <span className="input-error">Invalid phone number</span>
-                )}
-              </label>
-              <br />
-
-              <label htmlFor="address">
-                Address :
-                <br />
-                <input
-                  type="text"
-                  name="address"
-                  onChange={(event) => {
-                    setAddress(event.currentTarget.value);
-                  }}
-                />
-                {userAddress.length > 6 && userAddress.length < 100 && validator.isAscii ? null : (
-                  <span className="input-error">Invalid address</span>
-                )}
-              </label>
-              <br />
-              <button type="button" className="signUp-container__form__button" onClick={onRegister}>
-                Login
-              </button>
-            </form>
-          </div>
-        );
-      }}
-    </UserContext.Consumer>
+        <label htmlFor="address">
+          Address :
+          <br />
+          <input
+            type="text"
+            name="address"
+            onChange={(event) => {
+              setAddress(event.currentTarget.value);
+            }}
+          />
+          {userAddress.length > 6 && userAddress.length < 100 && validator.isAscii ? null : (
+            <span className="input-error">Invalid address</span>
+          )}
+        </label>
+        <br />
+        <button type="button" className="signUp-container__form__button" onClick={onRegister}>
+          Login
+        </button>
+      </form>
+    </div>
   );
 }
 

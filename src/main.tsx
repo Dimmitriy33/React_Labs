@@ -3,61 +3,22 @@ import ReactDom from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 // eslint-disable-next-line no-use-before-define
 import React from "react";
+import { Provider } from "react-redux";
 import { Header, Footer, HomePage, ProductsPage, BasketPage, AboutPage, ProfilePage } from "./components";
 import * as Routes from "./constants/routes";
-import UserContext, { IContext, IUser } from "./components/users/userContext";
 import PrivateRoute from "./helpers/privateRoute";
+import { store } from "./redux/store";
 
-class MainApp extends React.Component<any, { user: IUser; token: string; isAuthenticated: boolean }> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      user: {
-        id: "",
-        userName: "",
-        phoneNumber: "",
-        addressDelivery: "",
-        concurancyStamp: "",
-      },
-      token: "",
-      isAuthenticated: false,
-    };
-  }
-
+class MainApp extends React.Component {
   componentDidCatch(error: Error) {
     alert(error);
     console.error("UI error:", error);
     window.location.assign(Routes.Home);
   }
 
-  setUser = (newUser: IUser) => {
-    this.setState({ user: newUser });
-  };
-
-  login = (newToken: string) => {
-    this.setState({ token: newToken });
-    this.setState({ isAuthenticated: true });
-  };
-
-  logout = () => {
-    this.setState({ isAuthenticated: false });
-    this.setState({ token: "" });
-    this.setState({ user: { id: "", userName: "", phoneNumber: "", addressDelivery: "", concurancyStamp: "" } });
-    window.location.assign(Routes.Home);
-  };
-
   render() {
-    const userCtx: IContext = {
-      user: this.state.user,
-      logout: this.logout,
-      login: this.login,
-      setUser: this.setUser,
-      token: this.state.token,
-      isAuthenticated: this.state.isAuthenticated,
-    };
-
     return (
-      <UserContext.Provider value={userCtx}>
+      <Provider store={store}>
         <Router>
           <Header />
           <Switch>
@@ -78,7 +39,7 @@ class MainApp extends React.Component<any, { user: IUser; token: string; isAuthe
           </Switch>
           <Footer />
         </Router>
-      </UserContext.Provider>
+      </Provider>
     );
   }
 }

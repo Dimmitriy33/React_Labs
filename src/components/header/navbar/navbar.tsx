@@ -1,8 +1,10 @@
-import { NavLink as Link } from "react-router-dom";
+import { NavLink as Link, useHistory } from "react-router-dom";
 import "./navbar.scss";
 import { useState } from "react";
 import Modal from "@/elements/modal";
-import UserContext from "@/components/users/userContext";
+import useTypedSelector from "@/redux/customHooks/typedSelector";
+import { useDispatch } from "react-redux";
+import { logoutAsync } from "@/redux/actions/userActions";
 import SignIn from "../../users/signIn/signIn";
 import SignUp from "../../users/signUp/signUp";
 import * as Routes from "../../../constants/routes";
@@ -46,48 +48,49 @@ const Menu = () => (
 function AuthButtons(): JSX.Element {
   const [showSignInModal, toggleSignInModal] = useState<boolean>(false);
   const [showSignUpModal, toggleSignUpModal] = useState<boolean>(false);
+  const isAuth = useTypedSelector((state) => state.user.isAuthenticated);
+  const username = useTypedSelector((state) => state.user.user.userName);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
-    <UserContext.Consumer>
-      {(userCtx) => (
-        <div className="navbar-container__btn">
-          {!userCtx?.isAuthenticated ? (
-            <button type="button" onClick={() => toggleSignInModal(true)}>
-              Sign In
-            </button>
-          ) : (
-            <h2>{userCtx?.user.userName}</h2>
-          )}
-
-          {showSignInModal ? (
-            <Modal closeCallback={() => toggleSignInModal(false)}>
-              <SignIn closeCallback={() => toggleSignInModal(false)} />
-            </Modal>
-          ) : null}
-
-          {showSignUpModal ? (
-            <Modal closeCallback={() => toggleSignUpModal(false)}>
-              <SignUp closeCallback={() => toggleSignUpModal(false)} />
-            </Modal>
-          ) : null}
-
-          {!userCtx?.isAuthenticated ? (
-            <button type="button" onClick={() => toggleSignUpModal(true)}>
-              Sign Up
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => {
-                userCtx && userCtx.logout();
-              }}
-            >
-              Sign Out
-            </button>
-          )}
-        </div>
+    <div className="navbar-container__btn">
+      {!isAuth ? (
+        <button type="button" onClick={() => toggleSignInModal(true)}>
+          Sign In
+        </button>
+      ) : (
+        <h2>{username}</h2>
       )}
-    </UserContext.Consumer>
+
+      {showSignInModal ? (
+        <Modal closeCallback={() => toggleSignInModal(false)}>
+          <SignIn closeCallback={() => toggleSignInModal(false)} />
+        </Modal>
+      ) : null}
+
+      {showSignUpModal ? (
+        <Modal closeCallback={() => toggleSignUpModal(false)}>
+          <SignUp closeCallback={() => toggleSignUpModal(false)} />
+        </Modal>
+      ) : null}
+
+      {!isAuth ? (
+        <button type="button" onClick={() => toggleSignUpModal(true)}>
+          Sign Up
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(logoutAsync());
+            history.push(Routes.Home);
+          }}
+        >
+          Sign Out
+        </button>
+      )}
+    </div>
   );
 }
 
