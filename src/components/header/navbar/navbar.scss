@@ -49,11 +49,11 @@
       font-size: 19px;
 
       &:hover > ul {
-        padding-left: 320px;
-        padding-top: 150px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
         visibility: visible;
         opacity: 1;
-        display: block;
         cursor: pointer;
         color: #ff4747;
       }

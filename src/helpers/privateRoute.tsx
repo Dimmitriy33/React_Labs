@@ -8,13 +8,13 @@ export default function PrivateRoute({ children, ...rest }: { children: ReactNod
   const context = useContext(Context);
   const [showSignInModal, toggleSignInModal] = useState<boolean>(false);
 
-  if (context?.isAiuthenticated) {
+  if (context?.isAuthenticated) {
     return <Route {...rest} render={() => children} />;
   }
   return (
     <Route {...rest}>
       <Modal closeCallback={() => toggleSignInModal(false)}>
-        <SignIn />
+        <SignIn closeCallback={() => toggleSignInModal(false)} />
       </Modal>
     </Route>
   );
