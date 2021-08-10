@@ -3,7 +3,7 @@
   height: auto;
   background-color: $basicColor;
   flex-direction: column;
-  font-family: "FiraSans-Regular", sans-serif;
+  font-family: $basicFontFamily;
   white-space: normal;
   word-wrap: break-word;
 
@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    font-family: "FiraSans-Regular", sans-serif;
+    font-family: $basicFontFamily;
 
     &__rect {
       height: 100px;

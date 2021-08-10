@@ -1,12 +1,12 @@
+import { connectionString } from "@/constants/db";
+
 async function getToken(uEmail: string, uPassword: string): Promise<string | null> {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
-  const response = await fetch("http://localhost:8000/api/auth/sign-in", {
+  const response = await fetch(`${connectionString}/api/auth/sign-in`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: myHeaders,
     body: JSON.stringify({
       email: uEmail,
       password: uPassword,

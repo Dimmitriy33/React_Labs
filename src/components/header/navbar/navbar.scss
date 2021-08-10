@@ -7,7 +7,7 @@
   &__menu {
     display: flex;
     justify-content: space-between;
-    font-family: "FiraSans-Regular", sans-serif;
+    font-family: $basicFontFamily;
     box-sizing: border-box;
     flex-direction: row;
     word-wrap: break-word;
@@ -49,11 +49,11 @@
       font-size: 19px;
 
       &:hover > ul {
-        padding-left: 320px;
-        padding-top: 150px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
         visibility: visible;
         opacity: 1;
-        display: block;
         cursor: pointer;
         color: #ff4747;
       }
@@ -96,7 +96,7 @@
       margin-left: 5%;
       font-weight: 600;
       font-size: 15px;
-      font-family: "FiraSans-Regular", sans-serif;
+      font-family: $basicFontFamily;
       color: #ffffff;
       text-decoration: none;
       letter-spacing: 0.5px;
