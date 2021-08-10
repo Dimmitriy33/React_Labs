@@ -8,7 +8,7 @@ import * as Routes from "./constants/routes";
 import UserContext, { IContext, IUser } from "./components/users/userContext";
 import PrivateRoute from "./helpers/privateRoute";
 
-class MainApp extends React.Component<any, { user: IUser; token: string; isAiuthenticated: boolean }> {
+class MainApp extends React.Component<any, { user: IUser; token: string; isAuthenticated: boolean }> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ class MainApp extends React.Component<any, { user: IUser; token: string; isAiuth
         concurancyStamp: "",
       },
       token: "",
-      isAiuthenticated: false,
+      isAuthenticated: false,
     };
   }
 
@@ -36,11 +36,11 @@ class MainApp extends React.Component<any, { user: IUser; token: string; isAiuth
 
   login = (newToken: string) => {
     this.setState({ token: newToken });
-    this.setState({ isAiuthenticated: true });
+    this.setState({ isAuthenticated: true });
   };
 
   logout = () => {
-    this.setState({ isAiuthenticated: false });
+    this.setState({ isAuthenticated: false });
     this.setState({ token: "" });
     this.setState({ user: { id: "", userName: "", phoneNumber: "", addressDelivery: "", concurancyStamp: "" } });
     window.location.assign(Routes.Home);
@@ -53,7 +53,7 @@ class MainApp extends React.Component<any, { user: IUser; token: string; isAiuth
       login: this.login,
       setUser: this.setUser,
       token: this.state.token,
-      isAiuthenticated: this.state.isAiuthenticated,
+      isAuthenticated: this.state.isAuthenticated,
     };
 
     return (

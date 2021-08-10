@@ -25,7 +25,7 @@ export interface ILoginUser {
 export interface IContext {
   user: IUser;
   token: string;
-  isAiuthenticated: boolean;
+  isAuthenticated: boolean;
   login: (token: string) => void;
   setUser: (user: IUser) => void;
   logout: () => void;
