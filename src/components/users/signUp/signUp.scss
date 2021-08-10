@@ -23,7 +23,7 @@
       justify-content: center;
       margin-top: 0;
       margin-bottom: 30px;
-      font-family: "FiraSans-Regular", sans-serif;
+      font-family: $basicFontFamily;
       font-size: 1.8em;
       letter-spacing: 0.5px;
       text-decoration: none;
@@ -38,7 +38,7 @@
       justify-items: center;
       width: 200px;
       margin-top: 10px;
-      font-family: "FiraSans-Regular", sans-serif;
+      font-family: $basicFontFamily;
       font-size: 1.2em;
       letter-spacing: 0.5px;
       text-decoration: none;
@@ -46,7 +46,7 @@
 
     > label {
       width: 100%;
-      font-family: "FiraSans-Regular", sans-serif;
+      font-family: $basicFontFamily;
       font-size: 1.2em;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -58,7 +58,7 @@
         height: auto;
         min-height: 30px;
         padding-left: 10px;
-        font-family: "FiraSans-Regular", sans-serif;
+        font-family: $basicFontFamily;
         font-size: 16px;
         font-weight: 600;
         border-radius: 4px;
@@ -81,7 +81,7 @@
       width: 100px;
       font-weight: 600;
       font-size: 15px;
-      font-family: "FiraSans-Regular", sans-serif;
+      font-family: $basicFontFamily;
       color: #ffffff;
       text-decoration: none;
       letter-spacing: 0.5px;
@@ -109,7 +109,7 @@
   width: 100%;
   font-weight: 600;
   font-size: 14px;
-  font-family: "FiraSans-Regular", sans-serif;
+  font-family: $basicFontFamily;
   color: #ff4747;
   text-decoration: none;
   letter-spacing: 0.5px;

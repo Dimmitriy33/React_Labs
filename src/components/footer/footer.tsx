@@ -1,6 +1,4 @@
 import "./footer.scss";
-// eslint-disable-next-line no-use-before-define
-import React from "react";
 import EAIcon from "../../assets/images/icons/eaIcon.png";
 import ValveIcon from "../../assets/images/icons/valveIcon.jpg";
 import EpicIcon from "../../assets/images/icons/epicGamesIcon.png";
@@ -25,15 +23,11 @@ const CompaniesIcon = () => (
   </div>
 );
 
-class Footer extends React.PureComponent {
-  render(): JSX.Element {
-    return (
-      <footer className="footer-container">
-        <FooterTitle />
-        <CompaniesIcon />
-      </footer>
-    );
-  }
-}
+const Footer = (): JSX.Element => (
+  <footer className="footer-container">
+    <FooterTitle />
+    <CompaniesIcon />
+  </footer>
+);
 
 export default Footer;

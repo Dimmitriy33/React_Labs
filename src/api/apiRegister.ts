@@ -1,4 +1,5 @@
 import { IRegisterUser } from "@/components/users/userContext";
+import { connectionString } from "@/constants/db";
 
 async function registerUser(user: IRegisterUser): Promise<boolean> {
   let responseResult = false;
@@ -6,9 +7,7 @@ async function registerUser(user: IRegisterUser): Promise<boolean> {
   myHeaders.append("Content-Type", "application/json");
   const requestOptions = {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: myHeaders,
     body: JSON.stringify({
       email: user.email,
       userName: user.userName,
@@ -18,7 +17,7 @@ async function registerUser(user: IRegisterUser): Promise<boolean> {
     }),
   };
 
-  const response = await fetch("http://localhost:8000/api/auth/sign-up", requestOptions);
+  const response = await fetch(`${connectionString}/api/auth/sign-up`, requestOptions);
   if (response.ok) {
     responseResult = true;
   }
