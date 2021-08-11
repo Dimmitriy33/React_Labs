@@ -60,7 +60,9 @@ function AuthButtons(): JSX.Element {
           Sign In
         </button>
       ) : (
-        <h2>{username}</h2>
+        <Link className="profile_link" to={Routes.Profile}>
+          {username}
+        </Link>
       )}
 
       {showSignInModal ? (
@@ -84,6 +86,8 @@ function AuthButtons(): JSX.Element {
           type="button"
           onClick={() => {
             dispatch(logoutAsync());
+            toggleSignInModal(false);
+            toggleSignUpModal(false);
             history.push(Routes.Home);
           }}
         >

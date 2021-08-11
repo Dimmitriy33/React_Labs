@@ -4,6 +4,61 @@
   width: 80%;
   justify-content: space-between;
 
+  a {
+    text-decoration: none;
+    color: $basicColor;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    flex-wrap: nowrap;
+    > button {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 40px;
+      width: 100px;
+      margin-left: 5%;
+      font-weight: 600;
+      font-size: 15px;
+      font-family: $basicFontFamily;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      background-color: #ff4747;
+      border-radius: 10px;
+      border-color: transparent;
+      transition-duration: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ff9191;
+      }
+    }
+
+    a {
+      display: flex;
+      justify-content: space-between;
+      font-family: $basicFontFamily;
+      font-weight: 600;
+      box-sizing: border-box;
+      flex-direction: row;
+      word-wrap: break-word;
+      letter-spacing: 0.6px;
+      float: right;
+      text-decoration: none;
+      color: $basicColor;
+    }
+
+    a:hover {
+      color: #ff9191;
+    }
+  }
+
   &__menu {
     display: flex;
     justify-content: space-between;
@@ -25,11 +80,6 @@
       white-space: normal;
       list-style: none;
       cursor: default;
-    }
-
-    a {
-      text-decoration: none;
-      color: $basicColor;
     }
 
     li > a:hover {
@@ -78,38 +128,6 @@
       margin-top: 1rem;
       left: 0;
       display: none;
-    }
-  }
-
-  &__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 25%;
-    flex-wrap: nowrap;
-    > button {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      height: 40px;
-      width: 100px;
-      margin-left: 5%;
-      font-weight: 600;
-      font-size: 15px;
-      font-family: $basicFontFamily;
-      color: #ffffff;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-      background-color: #ff4747;
-      border-radius: 10px;
-      border-color: transparent;
-      transition-duration: 0.3s;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #ff9191;
-      }
     }
   }
 }

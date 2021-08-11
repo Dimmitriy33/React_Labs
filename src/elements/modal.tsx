@@ -15,6 +15,7 @@ const Modal = (props: IModalProps): React.ReactPortal => {
   const root = document.createElement("div");
   root.classList.add("modal-container");
   const history = useHistory();
+  const isAuth = useTypedSelector((state) => state.user.isAuthenticated);
 
   useEffect(() => {
     document.body.appendChild(root);
@@ -23,8 +24,6 @@ const Modal = (props: IModalProps): React.ReactPortal => {
   const removeModal = () => {
     document.body.removeChild(root);
     props.closeCallback();
-
-    const isAuth = useTypedSelector((state) => state.user.isAuthenticated);
 
     if (!isAuth) {
       history.push(Routes.Home);

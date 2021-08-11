@@ -55,8 +55,7 @@ function SignIn(props: SignInProps): JSX.Element {
     <div className="signIn-container">
       <form onSubmit={onLogin} className="signIn-container__form">
         <h1>Sign In</h1>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label>
+        <label htmlFor="u_email">
           Email :
           <br />
           <input
@@ -71,8 +70,7 @@ function SignIn(props: SignInProps): JSX.Element {
         </label>
         <br />
 
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label>
+        <label htmlFor="u_password">
           Password :
           <br />
           <input

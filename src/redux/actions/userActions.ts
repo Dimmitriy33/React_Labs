@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { IUser } from "@/components/users/userContext";
 import { Dispatch } from "redux";
 
@@ -38,14 +37,20 @@ function setUser(newUser: IUser) {
   };
 }
 
-export const loginAsync = (token: string) => async (dispatch: Dispatch) => {
-  await dispatch(login(token));
-};
+export const loginAsync =
+  (token: string) =>
+  async (dispatch: Dispatch): Promise<void> => {
+    await dispatch(login(token));
+  };
 
-export const logoutAsync = () => async (dispatch: Dispatch) => {
-  await dispatch(logout());
-};
+export const logoutAsync =
+  () =>
+  async (dispatch: Dispatch): Promise<void> => {
+    await dispatch(logout());
+  };
 
-export const setUserAsync = (user: IUser) => async (dispatch: Dispatch) => {
-  await dispatch(setUser(user));
-};
+export const setUserAsync =
+  (user: IUser) =>
+  async (dispatch: Dispatch): Promise<void> => {
+    await dispatch(setUser(user));
+  };

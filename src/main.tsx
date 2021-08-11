@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { Header, Footer, HomePage, ProductsPage, BasketPage, AboutPage, ProfilePage } from "./components";
 import * as Routes from "./constants/routes";
 import PrivateRoute from "./helpers/privateRoute";
-import { store } from "./redux/store";
+import store from "./redux/store";
 
 class MainApp extends React.Component {
   componentDidCatch(error: Error) {

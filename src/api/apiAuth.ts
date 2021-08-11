@@ -1,4 +1,4 @@
-import { connectionString } from "@/constants/db";
+import connectionString from "@/constants/db";
 
 async function getToken(uEmail: string, uPassword: string): Promise<string | null> {
   const myHeaders = new Headers();

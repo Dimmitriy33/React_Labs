@@ -1,5 +1,5 @@
 import { IRegisterUser } from "@/components/users/userContext";
-import { connectionString } from "@/constants/db";
+import connectionString from "@/constants/db";
 
 async function registerUser(user: IRegisterUser): Promise<boolean> {
   let responseResult = false;

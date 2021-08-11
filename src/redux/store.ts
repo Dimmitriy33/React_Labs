@@ -4,5 +4,5 @@ import { reducer } from "./reducers";
 
 const middlewares = [thunk];
 
-// eslint-disable-next-line import/prefer-default-export
-export const store = createStore(reducer, applyMiddleware(...middlewares));
+const store = createStore(reducer, applyMiddleware(...middlewares));
+export default store;
