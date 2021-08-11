@@ -7,7 +7,7 @@ import SignIn from "../components/users/signIn/signIn";
 export default function PrivateRoute({ children, ...rest }: { children: ReactNode; path: string }) {
   const [showSignInModal, toggleSignInModal] = useState<boolean>(false);
 
-  const isAuth = useTypedSelector((state) => state.user.isAuthenticated);
+  const isAuth = useTypedSelector((state) => state.userReducer.isAuthenticated);
 
   if (isAuth) {
     return <Route {...rest} render={() => children} />;

@@ -12,9 +12,13 @@ import * as Routes from "../../../constants/routes";
 import "./profile.scss";
 
 function Profile(): JSX.Element {
-  const [userUsername, setUsername] = useState<string>(useTypedSelector((state) => state.user.user.userName));
-  const [userAddress, setAddress] = useState<string>(useTypedSelector((state) => state.user.user.addressDelivery));
-  const [userPhoneNumber, setPhoneNumber] = useState<string>(useTypedSelector((state) => state.user.user.phoneNumber));
+  const [userUsername, setUsername] = useState<string>(useTypedSelector((state) => state.userReducer.user.userName));
+  const [userAddress, setAddress] = useState<string>(
+    useTypedSelector((state) => state.userReducer.user.addressDelivery)
+  );
+  const [userPhoneNumber, setPhoneNumber] = useState<string>(
+    useTypedSelector((state) => state.userReducer.user.phoneNumber)
+  );
 
   const [toogleChangePassword, setToogleChangePassword] = useState<boolean>(false);
   const [userPassword, setPassword] = useState<string>("");
@@ -24,14 +28,13 @@ function Profile(): JSX.Element {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const user = useTypedSelector((state) => state.user.user);
-  const token = useTypedSelector((state) => state.user.token);
+  const user = useTypedSelector((state) => state.userReducer.user);
+  const token = useTypedSelector((state) => state.userReducer.token);
 
   useEffect(() => {
-    const user1 = useTypedSelector((state) => state.user.user);
-    setUsername(user1.userName);
-    setPhoneNumber(user1.addressDelivery);
-    setPhoneNumber(user1.phoneNumber);
+    setUsername(user.userName);
+    setPhoneNumber(user.addressDelivery);
+    setPhoneNumber(user.phoneNumber);
   }, []);
 
   const onSaveChanges = async () => {

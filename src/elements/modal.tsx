@@ -15,7 +15,7 @@ const Modal = (props: IModalProps): React.ReactPortal => {
   const root = document.createElement("div");
   root.classList.add("modal-container");
   const history = useHistory();
-  const isAuth = useTypedSelector((state) => state.user.isAuthenticated);
+  const isAuth = useTypedSelector((state) => state.userReducer.isAuthenticated);
 
   useEffect(() => {
     document.body.appendChild(root);
