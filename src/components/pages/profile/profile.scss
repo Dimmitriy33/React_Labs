@@ -1,3 +1,108 @@
-div {
+.profile {
   font-family: $basicFontFamily;
+  background: linear-gradient(
+    90deg,
+    rgba(246, 143, 143, 1) 4%,
+    rgba(242, 242, 242, 0.9976365546218487) 50%,
+    rgba(153, 153, 153, 1)
+  );
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px 0;
+  border-left: 1px solid rgb(22, 22, 22);
+  border-right: 1px solid rgb(22, 22, 22);
+  background-color: #f2f2f2;
+
+  > label {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+    max-width: 600px;
+    align-items: center;
+    justify-content: left;
+    font-family: $basicFontFamily;
+    font-size: 18px;
+    font-weight: 600;
+    color: $basicColor;
+
+    > p {
+      width: 30%;
+    }
+
+    > input {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      justify-items: center;
+      margin-left: 10px;
+      width: 70%;
+      height: 30px;
+      min-width: 50px;
+      font-family: $basicFontFamily;
+      font-size: 1em;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border-radius: 4px;
+      background-color: white;
+      transition: 0.4s all;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+      }
+
+      > p {
+        width: 300px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__btns {
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-items: center;
+      height: 40px;
+      width: 200px;
+      font-weight: 600;
+      font-size: 15px;
+      margin-top: 50px;
+      font-family: $basicFontFamily;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      background-color: $basicColor;
+      border-radius: 10px;
+      border-color: transparent;
+      transition-duration: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ff4747;
+      }
+    }
+  }
 }
