@@ -1,5 +1,5 @@
-import UserContext from "@/components/users/userContext";
-import { ReactNode, useContext, useEffect } from "react";
+import useTypedSelector from "@/redux/customHooks/typedSelector";
+import { ReactNode, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useHistory } from "react-router-dom";
 import rmImage from "../assets/images/icons/icon-remove-1.jpg";
@@ -14,8 +14,8 @@ interface IModalProps {
 const Modal = (props: IModalProps): React.ReactPortal => {
   const root = document.createElement("div");
   root.classList.add("modal-container");
-  const context = useContext(UserContext);
   const history = useHistory();
+  const isAuth = useTypedSelector((state) => state.user.isAuthenticated);
 
   useEffect(() => {
     document.body.appendChild(root);
@@ -25,7 +25,7 @@ const Modal = (props: IModalProps): React.ReactPortal => {
     document.body.removeChild(root);
     props.closeCallback();
 
-    if (!context?.isAuthenticated) {
+    if (!isAuth) {
       history.push(Routes.Home);
     }
   };

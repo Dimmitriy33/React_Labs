@@ -1,6 +1,3 @@
-// eslint-disable-next-line import/no-cycle
-import React from "react";
-
 export interface IUser {
   id: string;
   userName: string;
@@ -21,16 +18,3 @@ export interface ILoginUser {
   email: string;
   password: string;
 }
-
-export interface IContext {
-  user: IUser;
-  token: string;
-  isAuthenticated: boolean;
-  login: (token: string) => void;
-  setUser: (user: IUser) => void;
-  logout: () => void;
-}
-
-const UserContext = React.createContext<IContext | null>(null);
-
-export default UserContext;

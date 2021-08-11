@@ -1,3 +1,5 @@
+import "./profile.scss";
+
 function Profile(): JSX.Element {
   return (
     <div>
