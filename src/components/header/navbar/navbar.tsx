@@ -1,6 +1,10 @@
-/* eslint-disable no-template-curly-in-string */
 import { NavLink as Link } from "react-router-dom";
 import "./navbar.scss";
+import { useState } from "react";
+import Modal from "@/elements/modal";
+import UserContext from "@/components/users/userContext";
+import SignIn from "../../users/signIn/signIn";
+import SignUp from "../../users/signUp/signUp";
 import * as Routes from "../../../constants/routes";
 
 const Menu = () => (
@@ -39,20 +43,54 @@ const Menu = () => (
   </nav>
 );
 
-const AuthButtons = () => (
-  <div className="navbar-container__btn">
-    <button type="button">
-      <Link className="navbar-container__btn__link" to={Routes.SignIn}>
-        Sign In
-      </Link>
-    </button>
-    <button type="button">
-      <Link className="navbar-container__btn__link" to={Routes.SignUp}>
-        Sign Up
-      </Link>
-    </button>
-  </div>
-);
+function AuthButtons(): JSX.Element {
+  const [showSignInModal, toggleSignInModal] = useState<boolean>(false);
+  const [showSignUpModal, toggleSignUpModal] = useState<boolean>(false);
+
+  return (
+    <UserContext.Consumer>
+      {(userCtx) => (
+        <div className="navbar-container__btn">
+          {!userCtx?.isAuthenticated ? (
+            <button type="button" onClick={() => toggleSignInModal(true)}>
+              Sign In
+            </button>
+          ) : (
+            <h2>{userCtx?.user.userName}</h2>
+          )}
+
+          {showSignInModal ? (
+            <Modal closeCallback={() => toggleSignInModal(false)}>
+              <SignIn closeCallback={() => toggleSignInModal(false)} />
+            </Modal>
+          ) : null}
+
+          {showSignUpModal ? (
+            <Modal closeCallback={() => toggleSignUpModal(false)}>
+              <SignUp closeCallback={() => toggleSignUpModal(false)} />
+            </Modal>
+          ) : null}
+
+          {!userCtx?.isAuthenticated ? (
+            <button type="button" onClick={() => toggleSignUpModal(true)}>
+              Sign Up
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                userCtx && userCtx.logout();
+              }}
+            >
+              Sign Out
+            </button>
+          )}
+        </div>
+      )}
+    </UserContext.Consumer>
+  );
+}
+
 function NavBar(): JSX.Element {
   return (
     <div className="navbar-container">

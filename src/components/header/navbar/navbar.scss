@@ -7,7 +7,7 @@
   &__menu {
     display: flex;
     justify-content: space-between;
-    font-family: "FiraSans-Regular", sans-serif;
+    font-family: $basicFontFamily;
     box-sizing: border-box;
     flex-direction: row;
     word-wrap: break-word;
@@ -20,6 +20,7 @@
       display: flex;
       justify-content: space-between;
       padding: 0;
+      margin: 0 0 0 0;
       font-weight: 600;
       white-space: normal;
       list-style: none;
@@ -41,17 +42,18 @@
       flex-direction: column;
       width: auto;
       align-items: center;
-      padding-top: 5px;
+      justify-content: center;
+      padding-top: 7px;
       margin-left: 20px;
       margin-right: 15px;
       font-size: 19px;
 
       &:hover > ul {
-        padding-left: 320px;
-        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
         visibility: visible;
         opacity: 1;
-        display: block;
         cursor: pointer;
         color: #ff4747;
       }
@@ -93,6 +95,10 @@
       width: 100px;
       margin-left: 5%;
       font-weight: 600;
+      font-size: 15px;
+      font-family: $basicFontFamily;
+      color: #ffffff;
+      text-decoration: none;
       letter-spacing: 0.5px;
       white-space: nowrap;
       background-color: #ff4747;
@@ -104,14 +110,6 @@
       &:hover {
         background-color: #ff9191;
       }
-    }
-
-    &__link {
-      display: flex;
-      text-decoration: none;
-      font-size: 15px;
-      font-family: "FiraSans-Regular", sans-serif;
-      color: #ffffff;
     }
   }
 }

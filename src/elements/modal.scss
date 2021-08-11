@@ -1,0 +1,60 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba($color: #464646, $alpha: 0.3);
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__window {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f2f2f2;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 600px;
+    max-height: 1000px;
+
+    &__button-container {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content: flex-end;
+      width: 100%;
+
+      max-height: 60px;
+
+      &__close {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        cursor: pointer;
+
+        > img {
+          margin: 0;
+          background: transparent;
+          height: 40px;
+          width: 40px;
+          color: transparent;
+          position: inherit;
+        }
+      }
+
+      &:hover {
+        > img {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}

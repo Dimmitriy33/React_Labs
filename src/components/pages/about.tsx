@@ -1,9 +1,5 @@
 function About(): JSX.Element {
-  return (
-    <div>
-      <h1>Fanat karambaby</h1>
-    </div>
-  );
+  return <div>about</div>;
 }
 
 export default About;

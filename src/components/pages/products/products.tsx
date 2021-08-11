@@ -3,10 +3,8 @@ import IGame from "@/models/productModel";
 import debounce from "@/helpers/debounce";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import LoadingGif from "../../../assets/images/icons/loadingGif.gif";
 import ProductsGrid from "../../products/productsGrid/productsGrid";
 import "./products.scss";
-import ConnectionString from "../../../constants/hostInfo";
 
 const Products = (): JSX.Element => {
   const params = useLocation().search;
@@ -17,13 +15,13 @@ const Products = (): JSX.Element => {
 
   useEffect(() => {
     if (searchInput !== "") {
-      fetch(`${ConnectionString}/api/games/search?term=${searchInput}&limit=100&offset=0`)
+      fetch(`/api/games/search?term=${searchInput}&limit=100&offset=0`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
         });
     } else {
-      fetch(`${ConnectionString}/api/games/list`)
+      fetch(`/api/games/list`)
         .then((response) => response.json())
         .then((data) => setProducts(data));
     }
@@ -55,7 +53,7 @@ const Products = (): JSX.Element => {
           }}
         />
       </div>
-      {loader ? <img className="productPage-container__loadingGif" src={LoadingGif} alt="loading ..." /> : null}
+      {loader ? <div className="lds-hourglass" /> : null}
       <ProductsGrid games={products} />
     </div>
   );
