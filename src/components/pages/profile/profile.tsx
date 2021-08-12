@@ -1,5 +1,4 @@
-import changePassword from "@/api/apiChangePassword";
-import updateUser from "@/api/apiUpdateUserInfo";
+import { changePassword, updateUser } from "@/api/apiUser";
 import { IUser } from "@/components/users/userContext";
 import { setUserAsync } from "@/redux/actions/userActions";
 import useTypedSelector from "@/redux/customHooks/typedSelector";

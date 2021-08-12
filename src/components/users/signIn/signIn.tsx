@@ -1,12 +1,12 @@
 import "./signIn.scss";
 import { useState } from "react";
-import getToken from "@/api/apiAuth";
-import getUser from "@/api/apiGetUser";
 import validator from "validator";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { loginAsync, setUserAsync } from "@/redux/actions/userActions";
 import { useDispatch } from "react-redux";
+import { getToken } from "@/api/apiAuth";
+import { getUser } from "@/api/apiUser";
 import * as Routes from "../../../constants/routes";
 import { IUser } from "../userContext";
 

@@ -1,7 +1,7 @@
-import getProductsByCategory from "@/api/apiProductsByCategory";
 import IGame from "@/models/productModel";
 import debounce from "@/helpers/debounce";
 import { useEffect, useState } from "react";
+import { getProductsByCategory, getProductsList, searchProducts } from "@/api/apiProducts";
 import { useLocation } from "react-router-dom";
 import ProductsGrid from "../../products/productsGrid/productsGrid";
 import "./products.scss";
@@ -13,26 +13,28 @@ const Products = (): JSX.Element => {
   const [products, setProducts] = useState<Array<IGame>>(new Array<IGame>());
   const [loader, toggleLoader] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (searchInput !== "") {
-      fetch(`/api/games/search?term=${searchInput}&limit=100&offset=0`)
-        .then((response) => response.json())
-        .then((data) => {
-          setProducts(data);
-        });
-    } else {
-      fetch(`/api/games/list`)
-        .then((response) => response.json())
-        .then((data) => setProducts(data));
-    }
-    toggleLoader(false);
-  }, [searchInput]);
+  const productsByInput = async () => {
+    setProducts(await searchProducts(searchInput));
+  };
+
+  const productsList = async () => {
+    setProducts(await getProductsList());
+  };
 
   const productsByCategory = async () => {
     if (category) {
       setProducts(await getProductsByCategory(category || ""));
     }
   };
+
+  useEffect(() => {
+    if (searchInput !== "") {
+      productsByInput();
+    } else {
+      productsList();
+    }
+    toggleLoader(false);
+  }, [searchInput]);
 
   useEffect(() => {
     productsByCategory();
