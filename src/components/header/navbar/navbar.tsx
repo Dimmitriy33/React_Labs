@@ -48,8 +48,8 @@ const Menu = () => (
 function AuthButtons(): JSX.Element {
   const [showSignInModal, toggleSignInModal] = useState<boolean>(false);
   const [showSignUpModal, toggleSignUpModal] = useState<boolean>(false);
-  const isAuth = useTypedSelector((state) => state.user.isAuthenticated);
-  const username = useTypedSelector((state) => state.user.user.userName);
+  const isAuth = useTypedSelector((state) => state.userReducer.isAuthenticated);
+  const username = useTypedSelector((state) => state.userReducer.user.userName);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -65,17 +65,17 @@ function AuthButtons(): JSX.Element {
         </Link>
       )}
 
-      {showSignInModal ? (
+      {showSignInModal && (
         <Modal closeCallback={() => toggleSignInModal(false)}>
           <SignIn closeCallback={() => toggleSignInModal(false)} />
         </Modal>
-      ) : null}
+      )}
 
-      {showSignUpModal ? (
+      {showSignUpModal && (
         <Modal closeCallback={() => toggleSignUpModal(false)}>
           <SignUp closeCallback={() => toggleSignUpModal(false)} />
         </Modal>
-      ) : null}
+      )}
 
       {!isAuth ? (
         <button type="button" onClick={() => toggleSignUpModal(true)}>

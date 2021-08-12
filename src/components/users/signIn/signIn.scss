@@ -1,47 +1,21 @@
 .signIn-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  max-width: 500px;
-  max-height: 900px;
-  min-width: 300px;
-  margin: 30px;
+  @include def-modal-container;
 
   &__form {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    @include def-box;
 
     h1 {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
+      @include def-text-block;
       margin-top: 0;
       margin-bottom: 30px;
-      font-family: $basicFontFamily;
       font-size: 1.8em;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      color: $basicColor;
     }
 
     > input {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      justify-items: center;
+      @include def-input;
       width: 200px;
-      margin-top: 10px;
-      font-family: $basicFontFamily;
+      margin-top: 20px;
       font-size: 1.2em;
-      letter-spacing: 0.5px;
-      text-decoration: none;
     }
 
     > label {
@@ -54,16 +28,12 @@
       color: $basicColor;
 
       > input {
+        @include def-input;
         width: 100%;
         height: auto;
         min-height: 30px;
-        padding-left: 10px;
-        font-family: $basicFontFamily;
-        font-size: 16px;
-        font-weight: 600;
-        border-radius: 4px;
+        margin-top: 5px;
         background-color: rgba(255, 255, 255, 0.3);
-        transition: 0.3s all;
       }
 
       &__text:hover {
@@ -73,45 +43,11 @@
     }
 
     &__button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      justify-items: center;
-      height: 40px;
-      width: 100px;
-      font-weight: 600;
-      font-size: 15px;
-      font-family: $basicFontFamily;
-      color: #ffffff;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-      background-color: $basicColor;
-      border-radius: 10px;
-      border-color: transparent;
-      transition-duration: 0.3s;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #ff4747;
-      }
+      @include submit-form-button;
     }
   }
 }
 
 .input-error {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  margin-top: 5px;
-  padding: 0;
-  width: 100%;
-  font-weight: 600;
-  font-size: 14px;
-  font-family: $basicFontFamily;
-  color: #ff4747;
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  transition-duration: 0.3s;
+  @include input-error-box;
 }

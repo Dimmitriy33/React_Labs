@@ -1,12 +1,13 @@
 import "./signIn.scss";
-import { useState } from "react";
-import getToken from "@/api/apiAuth";
 import getUser from "@/api/apiGetUser";
+import { useState } from "react";
+import { MaxAuthFieldLength, MinAuthFieldLength } from "@/constants/inputValidation";
 import validator from "validator";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { loginAsync, setUserAsync } from "@/redux/actions/userActions";
 import { useDispatch } from "react-redux";
+import getToken from "@/api/apiAuth";
 import * as Routes from "../../../constants/routes";
 import { IUser } from "../userContext";
 
@@ -66,7 +67,7 @@ function SignIn(props: SignInProps): JSX.Element {
               setEmail(event.target.value);
             }}
           />
-          {validator.isEmail(email) ? null : <span className="input-error">Invalid email</span>}
+          {!validator.isEmail(email) && <span className="input-error">Invalid email</span>}
         </label>
         <br />
 
@@ -81,7 +82,9 @@ function SignIn(props: SignInProps): JSX.Element {
               setPassword(event.currentTarget.value);
             }}
           />
-          {password.length > 5 && password.length < 30 && validator.isAlphanumeric(password) ? null : (
+          {password.length >= MinAuthFieldLength &&
+          password.length < MaxAuthFieldLength &&
+          validator.isAlphanumeric(password) ? null : (
             <span className="input-error">Invalid password</span>
           )}
         </label>

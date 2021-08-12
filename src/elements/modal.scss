@@ -7,10 +7,7 @@
   background: rgba($color: #464646, $alpha: 0.3);
   z-index: 10;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  @include def-box;
   &__window {
     display: flex;
     flex-direction: column;
