@@ -14,9 +14,8 @@ export async function getProductsList(): Promise<IGame[]> {
   return products;
 }
 
-export async function getProductsByCategory(category: string): Promise<IGame[]> {
-  const result = await fetch(`/api/games/list`);
-  const products: IGame[] = await result.json();
+export async function getProductsByCategory(category: string, productsList: IGame[] | null = null): Promise<IGame[]> {
+  const products: IGame[] = productsList === null ? await getProductsList() : productsList;
 
   const productsByCategory: IGame[] = [];
 
@@ -29,8 +28,27 @@ export async function getProductsByCategory(category: string): Promise<IGame[]> 
 }
 
 export async function searchProducts(input: string): Promise<IGame[]> {
-  const result = await fetch(`/api/games/search?term=${input}&limit=100&offset=0`);
+  const result = await fetch(`/api/games/search?term=${input}&limit=20&offset=0`);
   const products: IGame[] = await result.json();
+
+  return products;
+}
+
+export async function getFilteredAndSortedProducts(
+  sortField: string,
+  orderType: string,
+  filterType: string,
+  filterValue: string
+): Promise<IGame[] | number> {
+  const result = await fetch(
+    `/api/games/list?SortField=${sortField}&ordertype=${orderType}&FilterType=${filterType}&FilterValue=${filterValue}`
+  );
+
+  if (!result.ok) {
+    return result.status;
+  }
+
+  const products: Array<IGame> = await result.json();
 
   return products;
 }
