@@ -53,7 +53,7 @@ const Products = (): JSX.Element => {
           }}
         />
       </div>
-      {loader ? <div className="lds-hourglass" /> : null}
+      {loader && <div className="lds-hourglass" />}
       <ProductsGrid games={products} />
     </div>
   );

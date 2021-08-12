@@ -16,24 +16,10 @@
     width: 25%;
     flex-wrap: nowrap;
     > button {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      height: 40px;
-      width: 100px;
+      @include submit-form-button;
       margin-left: 5%;
-      font-weight: 600;
-      font-size: 15px;
-      font-family: $basicFontFamily;
-      color: #ffffff;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
+      justify-content: space-around;
       background-color: #ff4747;
-      border-radius: 10px;
-      border-color: transparent;
-      transition-duration: 0.3s;
-      cursor: pointer;
 
       &:hover {
         background-color: #ff9191;

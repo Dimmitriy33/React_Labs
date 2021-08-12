@@ -65,17 +65,17 @@ function AuthButtons(): JSX.Element {
         </Link>
       )}
 
-      {showSignInModal ? (
+      {showSignInModal && (
         <Modal closeCallback={() => toggleSignInModal(false)}>
           <SignIn closeCallback={() => toggleSignInModal(false)} />
         </Modal>
-      ) : null}
+      )}
 
-      {showSignUpModal ? (
+      {showSignUpModal && (
         <Modal closeCallback={() => toggleSignUpModal(false)}>
           <SignUp closeCallback={() => toggleSignUpModal(false)} />
         </Modal>
-      ) : null}
+      )}
 
       {!isAuth ? (
         <button type="button" onClick={() => toggleSignUpModal(true)}>

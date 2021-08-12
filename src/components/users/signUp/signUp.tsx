@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginAsync, setUserAsync } from "@/redux/actions/userActions";
+import { MinAuthFieldLength, MaxAuthFieldLength, MaxFieldLength, MinFieldLength } from "@/constants/inputValidation";
 import * as Routes from "../../../constants/routes";
 import { IRegisterUser, IUser } from "../userContext";
 
@@ -79,7 +80,7 @@ function SignUp(props: SignUpProps): JSX.Element {
               setEmail(event.currentTarget.value);
             }}
           />
-          {validator.isEmail(userEmail) ? null : <span className="input-error">Invalid email</span>}
+          {!validator.isEmail(userEmail) && <span className="input-error">Invalid email</span>}
         </label>
         <br />
         <label htmlFor="password">
@@ -93,7 +94,9 @@ function SignUp(props: SignUpProps): JSX.Element {
               setPassword(event.currentTarget.value);
             }}
           />
-          {userPassword.length > 5 && userPassword.length < 30 && validator.isAlphanumeric(userPassword) ? null : (
+          {userPassword.length >= MinAuthFieldLength &&
+          userPassword.length < MaxAuthFieldLength &&
+          validator.isAlphanumeric(userPassword) ? null : (
             <span className="input-error">Invalid password</span>
           )}
         </label>
@@ -109,7 +112,9 @@ function SignUp(props: SignUpProps): JSX.Element {
               setUsername(event.currentTarget.value);
             }}
           />
-          {userUsername.length > 5 && userUsername.length < 30 && validator.isAlphanumeric(userUsername) ? null : (
+          {userUsername.length >= MinAuthFieldLength &&
+          userUsername.length < MaxAuthFieldLength &&
+          validator.isAlphanumeric(userUsername) ? null : (
             <span className="input-error">Invalid username</span>
           )}
         </label>
@@ -125,7 +130,7 @@ function SignUp(props: SignUpProps): JSX.Element {
               setPhoneNumber(event.currentTarget.value);
             }}
           />
-          {validator.isMobilePhone(userPhoneNumber) ? null : <span className="input-error">Invalid phone number</span>}
+          {!validator.isMobilePhone(userPhoneNumber) && <span className="input-error">Invalid phone number</span>}
         </label>
         <br />
 
@@ -139,7 +144,7 @@ function SignUp(props: SignUpProps): JSX.Element {
               setAddress(event.currentTarget.value);
             }}
           />
-          {userAddress.length > 6 && userAddress.length < 100 && validator.isAscii ? null : (
+          {userAddress.length >= MinFieldLength && userAddress.length < MaxFieldLength && validator.isAscii ? null : (
             <span className="input-error">Invalid address</span>
           )}
         </label>

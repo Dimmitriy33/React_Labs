@@ -12,11 +12,8 @@
   }
 
   &__search {
-    display: flex;
+    @include def-box;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     font-family: $basicFontFamily;
     font-size: 24px;
 
@@ -27,14 +24,8 @@
     }
 
     &__text {
-      font-family: $basicFontFamily;
-      font-size: 18px;
       height: auto;
-      width: 30%;
-      min-height: 30px;
-      border-radius: 4px;
-      background-color: rgba(255, 255, 255, 0.3);
-      transition: 0.3s all;
+      @include def-input;
     }
 
     &__text:hover {

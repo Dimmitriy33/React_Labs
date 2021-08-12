@@ -1,6 +1,7 @@
 import changePassword from "@/api/apiChangePassword";
 import updateUser from "@/api/apiUpdateUserInfo";
 import { IUser } from "@/components/users/userContext";
+import { MaxAuthFieldLength, MaxFieldLength, MinAuthFieldLength, MinFieldLength } from "@/constants/inputValidation";
 import { setUserAsync } from "@/redux/actions/userActions";
 import useTypedSelector from "@/redux/customHooks/typedSelector";
 import { useEffect, useState } from "react";
@@ -84,7 +85,6 @@ function Profile(): JSX.Element {
     <div className="profile">
       <div className="profile-container">
         <h1>Profile Info</h1>
-
         <label htmlFor="username">
           <div className="profile-container__info">
             <p>Username </p>
@@ -97,12 +97,13 @@ function Profile(): JSX.Element {
               }}
             />
           </div>
-          {userUsername.length > 5 && userUsername.length < 30 && validator.isAlphanumeric(userUsername) ? null : (
+          {userUsername.length >= MinAuthFieldLength &&
+          userUsername.length < MaxAuthFieldLength &&
+          validator.isAlphanumeric(userUsername) ? null : (
             <span className="input-error">Invalid username</span>
           )}
         </label>
         <br />
-
         <label htmlFor="pNumber">
           <div className="profile-container__info">
             <p>Phone number </p>
@@ -118,7 +119,6 @@ function Profile(): JSX.Element {
           {validator.isMobilePhone(userPhoneNumber) ? null : <span className="input-error">Invalid phone number</span>}
         </label>
         <br />
-
         <label htmlFor="address">
           <div className="profile-container__info">
             <p>Address</p>
@@ -131,13 +131,13 @@ function Profile(): JSX.Element {
               }}
             />
           </div>
-          {userAddress.length > 6 && userAddress.length < 100 && validator.isAscii ? null : (
+          {userAddress.length >= MinFieldLength && userAddress.length < MaxFieldLength && validator.isAscii ? null : (
             <span className="input-error">Invalid address</span>
           )}
         </label>
         <br />
 
-        {toogleChangePassword ? (
+        {toogleChangePassword && (
           <label htmlFor="u_password">
             <div className="profile-container__info">
               <p>Current password</p>
@@ -150,13 +150,15 @@ function Profile(): JSX.Element {
                 }}
               />
             </div>
-            {userPassword.length > 5 && userPassword.length < 30 && validator.isAlphanumeric(userPassword) ? null : (
+            {userPassword.length >= MinAuthFieldLength &&
+            userPassword.length < MaxAuthFieldLength &&
+            validator.isAlphanumeric(userPassword) ? null : (
               <span className="input-error">Invalid password</span>
             )}
           </label>
-        ) : null}
+        )}
 
-        {toogleChangePassword ? (
+        {toogleChangePassword && (
           <label htmlFor="u_newPassword">
             <div className="profile-container__info">
               <p>New password</p>
@@ -169,15 +171,15 @@ function Profile(): JSX.Element {
                 }}
               />
             </div>
-            {userNewPassword.length > 5 &&
-            userNewPassword.length < 30 &&
+            {userNewPassword.length >= MinAuthFieldLength &&
+            userNewPassword.length < MaxAuthFieldLength &&
             validator.isAlphanumeric(userNewPassword) ? null : (
               <span className="input-error">Invalid password</span>
             )}
           </label>
-        ) : null}
+        )}
 
-        {toogleChangePassword ? (
+        {toogleChangePassword && (
           <label htmlFor="u_repeatNewPassword">
             <div className="profile-container__info">
               <p>Confirm new password</p>
@@ -190,22 +192,21 @@ function Profile(): JSX.Element {
                 }}
               />
             </div>
-            {userRepeatNewPassword.length > 5 &&
-            userRepeatNewPassword.length < 30 &&
+            {userRepeatNewPassword.length >= MinAuthFieldLength &&
+            userRepeatNewPassword.length < MaxAuthFieldLength &&
             validator.isAlphanumeric(userRepeatNewPassword) ? null : (
               <span className="input-error">Invalid password</span>
             )}
           </label>
-        ) : null}
+        )}
 
-        {toogleChangePassword ? (
+        {toogleChangePassword && (
           <div className="profile-container__btns">
             <button type="button" onClick={onChangePassword}>
               Change
             </button>
           </div>
-        ) : null}
-
+        )}
         <div className="profile-container__btns">
           <button type="button" onClick={() => setToogleChangePassword(true)}>
             Change password
