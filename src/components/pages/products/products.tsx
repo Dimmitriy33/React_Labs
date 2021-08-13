@@ -10,8 +10,18 @@ import {
 import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
-import ProductsGrid from "../../products/productsGrid/productsGrid";
 import "./products.scss";
+import {
+  filterTypeOptions,
+  orderTypes,
+  ordertypeOptions,
+  sortFieldOptions,
+  genreFilterValueOptions,
+  ageFilterValueOptions,
+  filterTypes,
+} from "@/constants/sortAndFilter";
+import { startErrorStatusCode } from "@/constants/db";
+import ProductsGrid from "../../products/productsGrid/productsGrid";
 
 interface SelectorModel {
   value: string;
@@ -32,23 +42,6 @@ const Products = (): JSX.Element => {
 
   const [filterValueOptions, setfilterValueOptions] = useState([{ value: "", label: "" }]);
 
-  const sortFieldOptions = [
-    { value: "Name", label: "Name" },
-    { value: "Rating", label: "Rating" },
-    { value: "Price", label: "Price" },
-  ];
-
-  const filterTypeOptions = [
-    { value: "", label: "" },
-    { value: "Genre", label: "Genre" },
-    { value: "Age", label: "Age" },
-  ];
-
-  const ordertypeOptions = [
-    { value: "Asc", label: "Asc" },
-    { value: "Desc", label: "Desc" },
-  ];
-
   const productsByInput = async () => {
     setProducts(await searchProducts(searchInput));
   };
@@ -67,15 +60,15 @@ const Products = (): JSX.Element => {
 
   const onFilterSubmit = async () => {
     const result = await getFilteredAndSortedProducts(
-      (sortField as SelectorModel) == null || (sortField as SelectorModel).value === "Name"
+      (sortField as SelectorModel) == null || (sortField as SelectorModel).value === orderTypes.Asc
         ? ""
         : ((sortField as SelectorModel).value as string),
-      (orderType as SelectorModel) == null ? "Asc" : ((orderType as SelectorModel).value as string),
+      (orderType as SelectorModel) == null ? orderTypes.Asc : ((orderType as SelectorModel).value as string),
       (filterType as SelectorModel) == null ? "" : ((filterType as SelectorModel).value as string),
       (filterValue as SelectorModel) == null ? "" : ((filterValue as SelectorModel).value as string)
     );
 
-    if (result >= 400) {
+    if (result >= startErrorStatusCode) {
       Swal.fire({
         title: "Error",
         text: "Invalid filter attempt!",
@@ -107,25 +100,10 @@ const Products = (): JSX.Element => {
   }, [category]);
 
   useEffect(() => {
-    if (filterType && ((filterType as SelectorModel).value as string) === "Genre") {
-      setfilterValueOptions([
-        { value: "", label: "" },
-        { value: "RolePlaying", label: "RolePlaying" },
-        { value: "Action", label: "Action" },
-        { value: "Strategy", label: "Strategy" },
-        { value: "Simulation", label: "Simulation" },
-        { value: "Esports", label: "Esports" },
-        { value: "MMO", label: "MMO" },
-        { value: "Adventure", label: "Adventure" },
-      ]);
-    } else if (filterType && ((filterType as SelectorModel).value as string) === "Age") {
-      setfilterValueOptions([
-        { value: "", label: "" },
-        { value: "0", label: "0" },
-        { value: "6", label: "6" },
-        { value: "12", label: "12" },
-        { value: "16", label: "16" },
-      ]);
+    if (filterType && ((filterType as SelectorModel).value as string) === filterTypes.Genre) {
+      setfilterValueOptions(genreFilterValueOptions);
+    } else if (filterType && ((filterType as SelectorModel).value as string) === filterTypes.Age) {
+      setfilterValueOptions(ageFilterValueOptions);
     } else {
       setfilterValueOptions([{ value: "", label: "" }]);
     }
