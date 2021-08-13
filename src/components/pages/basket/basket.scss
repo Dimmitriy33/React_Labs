@@ -1,0 +1,33 @@
+.editable-cell {
+  position: relative;
+}
+
+.editable-cell-value-wrap {
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.editable-row:hover .editable-cell-value-wrap {
+  padding: 4px 11px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+
+[data-theme="dark"] .editable-row:hover .editable-cell-value-wrap {
+  border: 1px solid #434343;
+}
+
+th {
+  font-family: $basicFontFamily;
+  font-size: 16px;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  color: $basicColor;
+}
+
+.button-submit {
+  margin: 30px auto;
+
+  @include submit-form-button($width: 200px);
+}
