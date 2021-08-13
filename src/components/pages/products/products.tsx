@@ -60,12 +60,12 @@ const Products = (): JSX.Element => {
 
   const onFilterSubmit = async () => {
     const result = await getFilteredAndSortedProducts(
-      (sortField as SelectorModel) == null || (sortField as SelectorModel).value === orderTypes.Asc
+      (sortField as SelectorModel) === null || (sortField as SelectorModel).value === orderTypes.Asc
         ? ""
         : ((sortField as SelectorModel).value as string),
-      (orderType as SelectorModel) == null ? orderTypes.Asc : ((orderType as SelectorModel).value as string),
-      (filterType as SelectorModel) == null ? "" : ((filterType as SelectorModel).value as string),
-      (filterValue as SelectorModel) == null ? "" : ((filterValue as SelectorModel).value as string)
+      (orderType as SelectorModel) === null ? orderTypes.Asc : ((orderType as SelectorModel).value as string),
+      (filterType as SelectorModel) === null ? "" : ((filterType as SelectorModel).value as string),
+      (filterValue as SelectorModel) === null ? "" : ((filterValue as SelectorModel).value as string)
     );
 
     if (result >= startErrorStatusCode) {
