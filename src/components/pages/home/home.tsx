@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { getTopProducts } from "@/api/apiProducts";
 import IGame from "../../../models/productModel";
 import ProductsGrid from "../../products/productsGrid/productsGrid";
-import getTopProducts from "../../../api/apiProducts";
 import "./home.scss";
 import CategoriesCards from "../../products/categoryCard/categories";
 

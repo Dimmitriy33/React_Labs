@@ -1,5 +1,4 @@
-import changePassword from "@/api/apiChangePassword";
-import updateUser from "@/api/apiUpdateUserInfo";
+import { changePassword, updateUser } from "@/api/apiUser";
 import { IUser } from "@/components/users/userContext";
 import { MaxAuthFieldLength, MaxFieldLength, MinAuthFieldLength, MinFieldLength } from "@/constants/inputValidation";
 import { setUserAsync } from "@/redux/actions/userActions";

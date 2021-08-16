@@ -3,7 +3,7 @@ import Card from "../card/card";
 import "./productsGrid.scss";
 
 interface ProductsGridProps {
-  games: Array<IGame>;
+  games: IGame[];
 }
 
 const ProductsGrid = (props: ProductsGridProps): JSX.Element => (

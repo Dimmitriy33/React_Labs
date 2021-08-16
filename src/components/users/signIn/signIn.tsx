@@ -1,5 +1,4 @@
 import "./signIn.scss";
-import getUser from "@/api/apiGetUser";
 import { useState } from "react";
 import { MaxAuthFieldLength, MinAuthFieldLength } from "@/constants/inputValidation";
 import validator from "validator";
@@ -7,7 +6,8 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { loginAsync, setUserAsync } from "@/redux/actions/userActions";
 import { useDispatch } from "react-redux";
-import getToken from "@/api/apiAuth";
+import { getToken } from "@/api/apiAuth";
+import { getUser } from "@/api/apiUser";
 import * as Routes from "../../../constants/routes";
 import { IUser } from "../userContext";
 

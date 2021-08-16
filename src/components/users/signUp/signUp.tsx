@@ -1,8 +1,5 @@
 import "./signUp.scss";
 import { useState } from "react";
-import getUser from "@/api/apiGetUser";
-import getToken from "@/api/apiAuth";
-import registerUser from "@/api/apiRegister";
 import validator from "validator";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
