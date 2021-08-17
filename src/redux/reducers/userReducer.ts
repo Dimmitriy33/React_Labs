@@ -8,6 +8,7 @@ export const initialState: IUserStore = {
     phoneNumber: "",
     addressDelivery: "",
     concurancyStamp: "",
+    isAdmin: false,
   },
   token: "",
   isAuthenticated: false,

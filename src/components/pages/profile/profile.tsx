@@ -20,6 +20,8 @@ function Profile(): JSX.Element {
     useTypedSelector((state) => state.userReducer.user.phoneNumber)
   );
 
+  const [userIsAdmin, setUserIsAdmin] = useState<boolean>(useTypedSelector((state) => state.userReducer.user.isAdmin));
+
   const [toogleChangePassword, setToogleChangePassword] = useState<boolean>(false);
   const [userPassword, setPassword] = useState<string>("");
   const [userNewPassword, setNewPassword] = useState<string>("");
@@ -35,6 +37,7 @@ function Profile(): JSX.Element {
     setUsername(user.userName);
     setPhoneNumber(user.addressDelivery);
     setPhoneNumber(user.phoneNumber);
+    setUserIsAdmin(user.isAdmin);
   }, []);
 
   const onSaveChanges = async () => {
@@ -83,7 +86,7 @@ function Profile(): JSX.Element {
   return (
     <div className="profile">
       <div className="profile-container">
-        <h1>Profile Info</h1>
+        {userIsAdmin ? <h1>Admin profile Info</h1> : <h1>User profile Info</h1>}
         <label htmlFor="username">
           <div className="profile-container__info">
             <p>Username </p>

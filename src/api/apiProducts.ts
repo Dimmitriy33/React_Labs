@@ -1,4 +1,4 @@
-import IGame from "../models/productModel";
+import IGame, { ICreateGame, IUpdateGame } from "@/redux/types/productState";
 
 export async function getTopProducts(count: number): Promise<IGame[]> {
   const result = await fetch(`/api/games/list?SortField=Rating&limit=${count}&ordertype=Desc`);
@@ -51,4 +51,65 @@ export async function getFilteredAndSortedProducts(
   const products: Array<IGame> = await result.json();
 
   return products;
+}
+
+export async function createGame(game: ICreateGame, token: string): Promise<boolean> {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${token}`);
+
+  const formdata = new FormData();
+  formdata.append("name", game.name);
+  formdata.append("platform", game.platform);
+  formdata.append("totalRating", game.totalRating.toString());
+  formdata.append("genre", game.genre);
+  formdata.append("rating", game.age.toString());
+  formdata.append("price", game.price.toString());
+  formdata.append("count", game.count.toString());
+  formdata.append("logo", game.logo);
+  formdata.append("background", game.background);
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: formdata,
+  };
+
+  const result = await fetch("http://localhost:8000/api/games", requestOptions);
+
+  if (result.ok) {
+    return true;
+  }
+
+  return false;
+}
+
+export async function updateGame(game: IUpdateGame, token: string): Promise<boolean> {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${token}`);
+
+  const formdata = new FormData();
+  formdata.append("id", game.id);
+  formdata.append("name", game.name);
+  formdata.append("platform", game.platform);
+  formdata.append("totalRating", game.totalRating.toString());
+  formdata.append("genre", game.genre);
+  formdata.append("rating", game.age.toString());
+  formdata.append("price", game.price.toString());
+  formdata.append("count", game.count.toString());
+  formdata.append("logo", game.logo);
+  formdata.append("background", game.background);
+
+  const requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: formdata,
+  };
+
+  const result = await fetch("http://localhost:8000/api/games", requestOptions);
+
+  if (result.ok) {
+    return true;
+  }
+
+  return false;
 }

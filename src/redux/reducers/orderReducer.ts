@@ -1,5 +1,5 @@
 import { IOrderAction, OrderActionTypes } from "../types/orderActionTypes";
-import { IOrder, IOrderStore } from "../types/orderState";
+import { IOrderStore } from "../types/orderState";
 
 export const initialState: IOrderStore = {
   orders: [],

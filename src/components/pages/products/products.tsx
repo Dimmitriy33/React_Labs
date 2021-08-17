@@ -1,4 +1,3 @@
-import IGame from "@/models/productModel";
 import debounce from "@/helpers/debounce";
 import { useEffect, useState } from "react";
 import {
@@ -21,6 +20,7 @@ import {
   filterTypes,
 } from "@/constants/sortAndFilter";
 import { startErrorStatusCode } from "@/constants/db";
+import IGame from "@/redux/types/productState";
 import ProductsGrid from "../../products/productsGrid/productsGrid";
 
 interface SelectorModel {

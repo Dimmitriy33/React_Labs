@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTopProducts } from "@/api/apiProducts";
-import IGame from "../../../models/productModel";
+import IGame from "@/redux/types/productState";
 import ProductsGrid from "../../products/productsGrid/productsGrid";
 import "./home.scss";
 import CategoriesCards from "../../products/categoryCard/categories";
