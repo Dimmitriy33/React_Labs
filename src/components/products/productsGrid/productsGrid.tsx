@@ -9,6 +9,7 @@ import Upsert, { UpsertOperation } from "../modals/upsert/upsert";
 
 interface ProductsGridProps {
   games: IGame[];
+  updateProducts: () => Promise<void>;
 }
 
 export default function ProductsGrid(props: ProductsGridProps): JSX.Element {
@@ -20,7 +21,6 @@ export default function ProductsGrid(props: ProductsGridProps): JSX.Element {
   const addGame = () => {
     setUpsertOperation(UpsertOperation.create);
     toggleUpsertModal(true);
-    console.log("add");
   };
 
   return (
@@ -33,13 +33,18 @@ export default function ProductsGrid(props: ProductsGridProps): JSX.Element {
           </div>
           {showUpsertModal && (
             <Modal closeCallback={() => toggleUpsertModal(false)}>
-              <Upsert game={undefined} operation={upsertOperation} closeCallback={() => toggleUpsertModal(false)} />
+              <Upsert
+                game={undefined}
+                operation={upsertOperation}
+                closeCallback={() => toggleUpsertModal(false)}
+                updateProducts={props.updateProducts}
+              />
             </Modal>
           )}
         </button>
       )}
       {props.games.map((game) => (
-        <Card key={game.id} game={game} />
+        <Card key={game.id} game={game} updateProducts={props.updateProducts} />
       ))}
     </div>
   );

@@ -1,3 +1,4 @@
+import connectionString from "@/constants/db";
 import IGame, { ICreateGame, IUpdateGame } from "@/redux/types/productState";
 
 export async function getTopProducts(count: number): Promise<IGame[]> {
@@ -74,7 +75,7 @@ export async function createGame(game: ICreateGame, token: string): Promise<bool
     body: formdata,
   };
 
-  const result = await fetch("http://localhost:8000/api/games", requestOptions);
+  const result = await fetch(`${connectionString}/api/games`, requestOptions);
 
   if (result.ok) {
     return true;
@@ -105,7 +106,25 @@ export async function updateGame(game: IUpdateGame, token: string): Promise<bool
     body: formdata,
   };
 
-  const result = await fetch("http://localhost:8000/api/games", requestOptions);
+  const result = await fetch(`${connectionString}/api/games`, requestOptions);
+
+  if (result.ok) {
+    return true;
+  }
+
+  return false;
+}
+
+export async function removeGame(id: string, token: string): Promise<boolean> {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${token}`);
+
+  const requestOptions = {
+    method: "DELETE",
+    headers: myHeaders,
+  };
+
+  const result = await fetch(`${connectionString}/api/games/id/${id}`, requestOptions);
 
   if (result.ok) {
     return true;

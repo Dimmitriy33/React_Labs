@@ -165,7 +165,7 @@ const Products = (): JSX.Element => {
         </div>
         <div className="products-container__products">
           {loader && <div className="lds-hourglass" />}
-          <ProductsGrid games={products} />
+          <ProductsGrid games={products} updateProducts={productsList} />
         </div>
       </div>
     </div>

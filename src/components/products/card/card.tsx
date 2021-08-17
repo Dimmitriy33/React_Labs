@@ -1,3 +1,4 @@
+import { removeGame } from "@/api/apiProducts";
 import Modal from "@/elements/modal";
 import { addGameToCartAsync } from "@/redux/actions/orderActions";
 import useTypedSelector from "@/redux/customHooks/typedSelector";
@@ -11,6 +12,7 @@ import "./card.scss";
 
 interface CardProps {
   game: IGame;
+  updateProducts: () => Promise<void>;
 }
 
 export default function Card(props: CardProps): JSX.Element {
@@ -19,6 +21,7 @@ export default function Card(props: CardProps): JSX.Element {
 
   const dispatch = useDispatch();
   const user = useTypedSelector((state) => state.userReducer.user);
+  const token = useTypedSelector((state) => state.userReducer.token);
 
   const addGameToCart = () => {
     dispatch(
@@ -33,14 +36,17 @@ export default function Card(props: CardProps): JSX.Element {
     );
   };
 
-  const removeGame = () => {
-    console.log("remove");
+  const removeGameSubmit = () => {
+    const result = window.confirm("Are you sure to remove this game");
+    if (result) {
+      removeGame(props.game.id, token);
+      props.updateProducts();
+    }
   };
 
   const updateGame = () => {
     setUpsertOperation(UpsertOperation.update);
     toggleUpsertModal(true);
-    console.log("update");
   };
 
   return !user.isAdmin ? (
@@ -55,7 +61,7 @@ export default function Card(props: CardProps): JSX.Element {
       <img src={props.game.logo} alt="logo" />
       <p className="card-container__title">{props.game.name}</p>
       <div className="card-container__crud">
-        <button className="button-submit" type="button" onClick={removeGame}>
+        <button className="button-submit" type="button" onClick={removeGameSubmit}>
           Remove
         </button>
         <button className="button-submit" type="button" onClick={updateGame}>
@@ -64,7 +70,12 @@ export default function Card(props: CardProps): JSX.Element {
       </div>
       {showUpsertModal && (
         <Modal closeCallback={() => toggleUpsertModal(false)}>
-          <Upsert game={props.game} operation={upsertOperation} closeCallback={() => toggleUpsertModal(false)} />
+          <Upsert
+            game={props.game}
+            operation={upsertOperation}
+            closeCallback={() => toggleUpsertModal(false)}
+            updateProducts={props.updateProducts}
+          />
         </Modal>
       )}
     </div>

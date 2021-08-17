@@ -12,11 +12,9 @@ import {
 } from "@/constants/inputValidation";
 import validator from "validator";
 import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
 import { createGame, updateGame } from "@/api/apiProducts";
 import useTypedSelector from "@/redux/customHooks/typedSelector";
 import IGame, { ICreateGame, IUpdateGame } from "@/redux/types/productState";
-import * as Routes from "../../../../constants/routes";
 
 export const enum UpsertOperation {
   update,
@@ -25,6 +23,7 @@ export const enum UpsertOperation {
 
 interface UpsertProps {
   closeCallback: () => void;
+  updateProducts: () => Promise<void>;
   operation: UpsertOperation;
   game?: IGame;
 }
@@ -40,7 +39,6 @@ export default function Upsert(props: UpsertProps): JSX.Element {
   const [price, setPrice] = useState<string>("");
   const [count, setCount] = useState<string>("");
 
-  const history = useHistory();
   const token = useTypedSelector((state) => state.userReducer.token);
 
   useEffect(() => {
@@ -54,18 +52,6 @@ export default function Upsert(props: UpsertProps): JSX.Element {
       setCount(props.game.count.toString());
     }
   }, []);
-
-  const closeModal = () => {
-    Swal.fire({
-      title: "Error",
-      text: "Invalid login attempt!",
-      icon: "error",
-    });
-
-    props.closeCallback();
-
-    history.push(Routes.Home);
-  };
 
   const onSubmit = async () => {
     if (props.operation === UpsertOperation.create) {
@@ -130,6 +116,7 @@ export default function Upsert(props: UpsertProps): JSX.Element {
     }
 
     props.closeCallback();
+    props.updateProducts();
     document.body.removeChild<Element>(document.getElementsByClassName("modal-container")[0]);
   };
 

@@ -24,7 +24,7 @@ function Home(): JSX.Element {
         <h2>Categories</h2>
         <CategoriesCards names={Categories} />
         <h2>New Products</h2>
-        <ProductsGrid games={products} />
+        <ProductsGrid games={products} updateProducts={topProducts} />
       </div>
     </div>
   );
