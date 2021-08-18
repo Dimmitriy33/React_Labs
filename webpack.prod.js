@@ -4,6 +4,7 @@ const { merge } = require("webpack-merge");
 const CompressionPlugin = require("compression-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const webpack = require("webpack");
 const common = require("./webpack.common");
 
 module.exports = (env, argv) => {
@@ -50,6 +51,8 @@ module.exports = (env, argv) => {
         // optional: it creates gzipped (compressed) files in '[path].gz[query]'
         threshold: common.filesThreshold, // (bytes). Only assets bigger than this size are processed
       }),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin(),
     ],
   };
 

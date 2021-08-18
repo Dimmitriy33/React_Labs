@@ -35,18 +35,18 @@ export const ageFilterValueOptions = [
   { value: "16", label: "16" },
 ];
 
-export enum orderTypes {
+export const enum orderTypes {
   Asc = "Asc",
   Decs = "Desc",
 }
 
-export enum sortFields {
+export const enum sortFields {
   Name = "Name",
   Rating = "Rating",
   Price = "Price",
 }
 
-export enum filterTypes {
+export const enum filterTypes {
   Genre = "Genre",
   Age = "Age",
 }

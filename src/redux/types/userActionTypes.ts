@@ -1,7 +1,7 @@
 import { IUser } from "@/components/users/userContext";
 
 // eslint-disable-next-line no-shadow
-export enum UserActionTypes {
+export const enum UserActionTypes {
   LOGIN_USER = "LOGIN_USER",
   LOGOUT_USER = "LOGOUT_USER",
   SET_USER = "SET_USER",
