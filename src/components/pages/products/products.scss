@@ -17,12 +17,14 @@
     @include def-box;
     flex-direction: row;
     font-family: $basicFontFamily;
-    font-size: 24px;
+    font-size: 22px;
+    width: 200px;
 
     > h2 {
       padding-right: 10px;
       font-size: 20px;
       font-weight: 600;
+      margin-bottom: 0;
     }
 
     &__text {

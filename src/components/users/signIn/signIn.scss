@@ -7,8 +7,9 @@
     h1 {
       @include def-text-block;
       margin-top: 0;
+      font-weight: 600;
       margin-bottom: 30px;
-      font-size: 1.8em;
+      font-size: 2em;
     }
 
     > input {
