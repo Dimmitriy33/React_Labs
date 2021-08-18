@@ -7,7 +7,6 @@ interface IOrderRequest {
 }
 
 export default async function makeAnOrder(games: IOrder[], token: string): Promise<boolean> {
-  let responseResult = false;
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${token}`);
   myHeaders.append("Content-Type", "application/json");
@@ -31,8 +30,8 @@ export default async function makeAnOrder(games: IOrder[], token: string): Promi
   const response = await fetch(`${connectionString}/api/orders `, requestOptions);
 
   if (response.ok) {
-    responseResult = true;
+    return true;
   }
 
-  return responseResult;
+  return false;
 }

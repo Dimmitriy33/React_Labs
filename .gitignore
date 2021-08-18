@@ -13,6 +13,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+.env
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -35,3 +36,4 @@ node_modules
 tsconfig.tsbuildinfo
 
 package-lock.json
+*.env

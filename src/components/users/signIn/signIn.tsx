@@ -8,6 +8,7 @@ import { loginAsync, setUserAsync } from "@/redux/actions/userActions";
 import { useDispatch } from "react-redux";
 import { getToken } from "@/api/apiAuth";
 import { getUser } from "@/api/apiUser";
+import { Admin } from "@/constants/db";
 import * as Routes from "../../../constants/routes";
 import { IUser } from "../userContext";
 
@@ -44,6 +45,9 @@ function SignIn(props: SignInProps): JSX.Element {
 
       if (user === null) {
         closeModal();
+      }
+      if (user?.userName === /* (process.env.REACT_APP_ADMIN as string) */ Admin) {
+        user.isAdmin = true;
       }
 
       dispatch(setUserAsync(user as IUser));

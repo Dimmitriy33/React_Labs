@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginAsync, setUserAsync } from "@/redux/actions/userActions";
 import { MinAuthFieldLength, MaxAuthFieldLength, MaxFieldLength, MinFieldLength } from "@/constants/inputValidation";
+import { registerUser, getToken } from "@/api/apiAuth";
+import { getUser } from "@/api/apiUser";
 import * as Routes from "../../../constants/routes";
 import { IRegisterUser, IUser } from "../userContext";
 
@@ -52,6 +54,11 @@ function SignUp(props: SignUpProps): JSX.Element {
         dispatch(loginAsync(token));
 
         const user = await getUser(token);
+
+        if (user?.userName === (process.env.REACT_APP_ADMIN as string)) {
+          user.isAdmin = true;
+        }
+
         dispatch(setUserAsync(user as IUser));
 
         history.push(Routes.Profile);
