@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { getTopProducts } from "@/api/apiProducts";
+import { Categories } from "@/constants/sortAndFilter";
 import IGame from "@/redux/types/productState";
 import ProductsGrid from "../../products/productsGrid/productsGrid";
 import "./home.scss";
 import CategoriesCards from "../../products/categoryCard/categories";
-
-const Categories = ["Pc", "Playstation", "Xbox", "Mobile", "Nintendo"];
 
 function Home(): JSX.Element {
   const [products, setProducts] = useState<Array<IGame>>(new Array<IGame>());

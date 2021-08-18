@@ -50,3 +50,5 @@ export enum filterTypes {
   Genre = "Genre",
   Age = "Age",
 }
+
+export const Categories = ["PC", "Playstation", "Xbox", "Mobile", "Nintendo"];

@@ -46,7 +46,7 @@ function SignIn(props: SignInProps): JSX.Element {
       if (user === null) {
         closeModal();
       }
-      if (user?.userName === /* (process.env.REACT_APP_ADMIN as string) */ Admin) {
+      if (user?.userName === Admin) {
         user.isAdmin = true;
       }
 

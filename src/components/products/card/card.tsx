@@ -5,7 +5,9 @@ import useTypedSelector from "@/redux/customHooks/typedSelector";
 import { IOrder } from "@/redux/types/orderState";
 import IGame from "@/redux/types/productState";
 import moment from "moment";
-import { useState } from "react";
+// eslint-disable-next-line no-use-before-define
+import React, { useState } from "react";
+
 import { useDispatch } from "react-redux";
 import Upsert, { UpsertOperation } from "../modals/upsert/upsert";
 import "./card.scss";
@@ -15,7 +17,7 @@ interface CardProps {
   updateProducts: () => Promise<void>;
 }
 
-export default function Card(props: CardProps): JSX.Element {
+function Card(props: CardProps): JSX.Element {
   const [showUpsertModal, toggleUpsertModal] = useState<boolean>(false);
   const [upsertOperation, setUpsertOperation] = useState<UpsertOperation>(UpsertOperation.create);
 
@@ -81,3 +83,5 @@ export default function Card(props: CardProps): JSX.Element {
     </div>
   );
 }
+
+export default React.memo(Card);
