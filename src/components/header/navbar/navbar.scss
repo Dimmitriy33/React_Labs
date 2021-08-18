@@ -80,7 +80,6 @@
       width: auto;
       align-items: center;
       justify-content: center;
-      padding-top: 7px;
       margin-left: 20px;
       margin-right: 15px;
       font-size: 19px;
@@ -130,6 +129,10 @@
   color: $basicColor;
   border: none;
   cursor: pointer;
+
+  > a:hover {
+    color: #ff4747;
+  }
 }
 
 .dropdown {

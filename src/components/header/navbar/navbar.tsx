@@ -21,7 +21,7 @@ const Menu = () => (
       <li>
         <div className="dropdown">
           <button type="button" className="dropbtn">
-            Products
+            <Link to={Routes.Products}>Products</Link>
           </button>
           <div className="dropdown-content">
             {Categories.map((category) => (
