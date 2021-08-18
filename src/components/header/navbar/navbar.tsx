@@ -19,14 +19,18 @@ const Menu = () => (
         <Link to={Routes.Home}>Home</Link>
       </li>
       <li>
-        <Link to={Routes.Products}>Products</Link>
-        <ul className="navbar-container__menu__dropdown">
-          {Categories.map((category) => (
-            <li key={category}>
-              <Link to={`${Routes.ProductsCategory}=${category}`}>{category}</Link>
-            </li>
-          ))}
-        </ul>
+        <div className="dropdown">
+          <button type="button" className="dropbtn">
+            Products
+          </button>
+          <div className="dropdown-content">
+            {Categories.map((category) => (
+              <Link key={category} to={`${Routes.ProductsCategory}=${category}`}>
+                {category}
+              </Link>
+            ))}
+          </div>
+        </div>
       </li>
       <li>
         <Link to={Routes.Basket}>Basket</Link>
