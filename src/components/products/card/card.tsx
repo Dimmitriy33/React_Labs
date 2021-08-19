@@ -44,10 +44,15 @@ function Card(props: CardProps): JSX.Element {
     });
   };
 
-  const removeGameSubmit = () => {
+  const removeGameSubmit = async () => {
     const result = window.confirm("Are you sure to remove this game");
     if (result) {
-      removeGame(props.game.id, token);
+      Swal.fire({
+        title: "Success",
+        text: "Item removed!",
+        icon: "success",
+      });
+      await removeGame(props.game.id, token);
       props.updateProducts();
     }
   };
