@@ -2,11 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 2%;
-  padding-left: 3%;
-  padding-right: 3%;
+  justify-content: flex-start;
   background-color: #fff;
+  padding: 1%;
 
   &__loadingGif {
     max-width: 200px;
@@ -59,7 +57,6 @@
     flex-direction: column;
     align-self: flex-start;
     align-items: center;
-    height: 100%;
     background-color: #f2f2f2;
     font-family: $basicFontFamily;
     letter-spacing: 0.6px;

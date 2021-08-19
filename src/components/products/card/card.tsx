@@ -1,14 +1,15 @@
 import { removeGame } from "@/api/apiProducts";
 import Modal from "@/elements/modal";
+import IGame from "@/models/productModel";
 import { addGameToCartAsync } from "@/redux/actions/orderActions";
 import useTypedSelector from "@/redux/customHooks/typedSelector";
 import { IOrder } from "@/redux/types/orderState";
-import IGame from "@/redux/types/productState";
 import moment from "moment";
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import Upsert, { UpsertOperation } from "../modals/upsert/upsert";
 import "./card.scss";
 
@@ -36,6 +37,11 @@ function Card(props: CardProps): JSX.Element {
         price: props.game.price,
       } as IOrder)
     );
+    Swal.fire({
+      title: "Success",
+      text: "Product added to the cart!",
+      icon: "success",
+    });
   };
 
   const removeGameSubmit = () => {
