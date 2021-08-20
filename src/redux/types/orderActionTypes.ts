@@ -1,7 +1,7 @@
 import { IOrder } from "./orderState";
 
 // eslint-disable-next-line no-shadow
-export enum OrderActionTypes {
+export const enum OrderActionTypes {
   ADD_GAME = "ADD_GAME",
   REMOVE_GAME = "REMOVE_GAME",
   REMOVE_ALL_GAMES = "REMOVE_ALL_GAMES",

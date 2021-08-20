@@ -187,20 +187,27 @@ class EditableTable extends React.Component<EditableTableProps & StateProps & Di
 
   submitOrder = async () => {
     const dataSource = [...this.state.dataSource];
-    const result = await makeAnOrder(dataSource, this.props.token);
-
-    if (result) {
-      this.setState({ dataSource: [] });
-      await this.props.removeAllGamesFromCartAsync();
-      Swal.fire({
-        title: "Good job!",
-        text: "Thank you for your order!",
-        icon: "success",
-      });
+    if (dataSource.length > 0) {
+      const result = await makeAnOrder(dataSource, this.props.token);
+      if (result) {
+        this.setState({ dataSource: [] });
+        await this.props.removeAllGamesFromCartAsync();
+        Swal.fire({
+          title: "Good job!",
+          text: "Thank you for your order!",
+          icon: "success",
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Invalid buy attempt!",
+          icon: "error",
+        });
+      }
     } else {
       Swal.fire({
         title: "Error",
-        text: "Invalid buy attempt!",
+        text: "Pls select products to make an order!",
         icon: "error",
       });
     }
@@ -249,7 +256,7 @@ class EditableTable extends React.Component<EditableTableProps & StateProps & Di
       };
     });
     return (
-      <div>
+      <div className="basketTable">
         <Table
           components={components}
           rowClassName={() => "editable-row"}

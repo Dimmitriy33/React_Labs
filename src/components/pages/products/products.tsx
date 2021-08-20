@@ -21,6 +21,7 @@ import {
 } from "@/constants/sortAndFilter";
 import { startErrorStatusCode } from "@/constants/db";
 import IGame from "@/redux/types/productState";
+import Spinner from "@/helpers/spinner/spinner";
 import ProductsGrid from "../../products/productsGrid/productsGrid";
 
 interface SelectorModel {
@@ -52,7 +53,7 @@ const Products = (): JSX.Element => {
 
   const productsByCategory = async () => {
     if (category) {
-      setProducts(await getProductsByCategory(category || ""));
+      setProducts(await getProductsByCategory(category.toLowerCase() || ""));
     } else {
       setProducts(await getProductsList());
     }
@@ -164,7 +165,7 @@ const Products = (): JSX.Element => {
           </button>
         </div>
         <div className="products-container__products">
-          {loader && <div className="lds-hourglass" />}
+          {loader && <Spinner />}
           <ProductsGrid games={products} updateProducts={productsList} />
         </div>
       </div>

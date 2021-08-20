@@ -1,12 +1,15 @@
 import { removeGame } from "@/api/apiProducts";
 import Modal from "@/elements/modal";
+import IGame from "@/models/productModel";
 import { addGameToCartAsync } from "@/redux/actions/orderActions";
 import useTypedSelector from "@/redux/customHooks/typedSelector";
 import { IOrder } from "@/redux/types/orderState";
-import IGame from "@/redux/types/productState";
 import moment from "moment";
-import { useState } from "react";
+// eslint-disable-next-line no-use-before-define
+import React, { useState } from "react";
+
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import Upsert, { UpsertOperation } from "../modals/upsert/upsert";
 import "./card.scss";
 
@@ -15,7 +18,7 @@ interface CardProps {
   updateProducts: () => Promise<void>;
 }
 
-export default function Card(props: CardProps): JSX.Element {
+function Card(props: CardProps): JSX.Element {
   const [showUpsertModal, toggleUpsertModal] = useState<boolean>(false);
   const [upsertOperation, setUpsertOperation] = useState<UpsertOperation>(UpsertOperation.create);
 
@@ -34,12 +37,22 @@ export default function Card(props: CardProps): JSX.Element {
         price: props.game.price,
       } as IOrder)
     );
+    Swal.fire({
+      title: "Success",
+      text: "Product added to the cart!",
+      icon: "success",
+    });
   };
 
-  const removeGameSubmit = () => {
+  const removeGameSubmit = async () => {
     const result = window.confirm("Are you sure to remove this game");
     if (result) {
-      removeGame(props.game.id, token);
+      Swal.fire({
+        title: "Success",
+        text: "Item removed!",
+        icon: "success",
+      });
+      await removeGame(props.game.id, token);
       props.updateProducts();
     }
   };
@@ -81,3 +94,5 @@ export default function Card(props: CardProps): JSX.Element {
     </div>
   );
 }
+
+export default React.memo(Card);

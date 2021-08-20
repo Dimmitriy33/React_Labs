@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable no-shadow */
 import "./upsert.scss";
 import { useEffect, useState } from "react";

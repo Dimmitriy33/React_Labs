@@ -1,5 +1,6 @@
 import IGame from "@/redux/types/productState";
-import { useState } from "react";
+// eslint-disable-next-line no-use-before-define
+import React, { useState } from "react";
 import useTypedSelector from "@/redux/customHooks/typedSelector";
 import Modal from "@/elements/modal";
 import Card from "../card/card";
@@ -12,7 +13,7 @@ interface ProductsGridProps {
   updateProducts: () => Promise<void>;
 }
 
-export default function ProductsGrid(props: ProductsGridProps): JSX.Element {
+function ProductsGrid(props: ProductsGridProps): JSX.Element {
   const [showUpsertModal, toggleUpsertModal] = useState<boolean>(false);
   const [upsertOperation, setUpsertOperation] = useState<UpsertOperation>(UpsertOperation.create);
 
@@ -49,3 +50,5 @@ export default function ProductsGrid(props: ProductsGridProps): JSX.Element {
     </div>
   );
 }
+
+export default React.memo(ProductsGrid);

@@ -1,8 +1,9 @@
 .footer-container {
   display: flex;
-  height: auto;
-  background-color: $basicColor;
   flex-direction: column;
+  height: auto;
+  width: 100%;
+  background-color: $basicColor;
   font-family: $basicFontFamily;
   white-space: normal;
   word-wrap: break-word;
