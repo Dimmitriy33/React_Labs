@@ -24,7 +24,7 @@ module.exports = (env, argv) => {
     target: "web", // force target otherwise HMR doesn't work for style-loader
     devServer: {
       proxy: {
-        "/api": "http://localhost:8000",
+        "/api": "http://localhost:3000",
       },
       hot: true,
       historyApiFallback: {
