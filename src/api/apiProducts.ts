@@ -21,7 +21,7 @@ export async function getProductsByCategory(category: string, productsList: IGam
   const productsByCategory: IGame[] = [];
 
   for (let i = 0; i < products.length; i++)
-    if (products[i].platform === category) {
+    if (products[i].platform.toLowerCase() === category.toLowerCase()) {
       productsByCategory.push(products[i]);
     }
 
