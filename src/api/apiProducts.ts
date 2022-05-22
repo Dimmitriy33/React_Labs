@@ -42,7 +42,7 @@ export async function getFilteredAndSortedProducts(
   filterValue: string
 ): Promise<IGame[] | number> {
   const result = await fetch(
-    `/api/games/list?SortField=${sortField}&ordertype=${orderType}&FilterType=${filterType}&FilterValue=${filterValue}`
+    `/api/games/list?sortField=${sortField}&orderType=${orderType}&filterType=${filterType}&filterValue=${filterValue}`
   );
 
   if (!result.ok) {

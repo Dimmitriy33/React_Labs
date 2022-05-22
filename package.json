@@ -45,6 +45,7 @@
     "@types/react-select": "^4.0.17",
     "@types/styled-components": "^5.1.11",
     "@types/validator": "^13.6.3",
+    "@types/websocket": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "autoprefixer": "^10.3.1",
@@ -129,6 +130,7 @@
     "svg-sprite-loader": "^6.0.9",
     "sweetalert2": "^11.1.2",
     "validator": "^13.6.0",
-    "webp-loader": "^0.6.0"
+    "webp-loader": "^0.6.0",
+    "websocket": "^1.0.34"
   }
 }

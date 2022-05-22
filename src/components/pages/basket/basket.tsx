@@ -15,8 +15,10 @@ import { addGameToCartAsync, removeAllGamesFromCartAsync, removeGameFromCartAsyn
 import { state } from "@/redux/reducers";
 import makeAnOrder from "@/api/apiOrder";
 import Swal from "sweetalert2";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
+const client = new W3CWebSocket("ws://127.0.0.1:8001");
 
 interface EditableRowProps {
   index: number;
@@ -185,6 +187,32 @@ class EditableTable extends React.Component<EditableTableProps & StateProps & Di
     };
   }
 
+  // eslint-disable-next-line react/no-deprecated
+  componentWillMount() {
+    client.onopen = () => {
+      console.log("WebSocket Client Connected");
+    };
+    client.onmessage = (message: any) => {
+      console.log(message);
+      const reader = new FileReader();
+
+      // This fires after the blob has been read/loaded.
+      reader.addEventListener("loadend", (e) => {
+        Swal.fire({
+          title: "Good job!",
+          // text: "Thank you for your order!",
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          text: e.srcElement.result,
+          icon: "success",
+        });
+      });
+
+      // Start reading the blob as text.
+      reader.readAsText(message.data);
+    };
+  }
+
   handleDelete = async (key: React.Key) => {
     const dataSource = [...this.state.dataSource];
     this.setState({ dataSource: dataSource.filter((item) => item.key !== key) });
@@ -198,11 +226,12 @@ class EditableTable extends React.Component<EditableTableProps & StateProps & Di
       if (result) {
         this.setState({ dataSource: [] });
         await this.props.removeAllGamesFromCartAsync();
-        Swal.fire({
-          title: "Good job!",
-          text: "Thank you for your order!",
-          icon: "success",
-        });
+        // Swal.fire({
+        //   title: "Good job!",
+        //   text: "Thank you for your order!",
+        //   icon: "success",
+        // });
+        client.send("Thank you for your order!");
       } else {
         Swal.fire({
           title: "Error",
